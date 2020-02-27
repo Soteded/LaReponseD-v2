@@ -4,17 +4,17 @@
 LaReponseD est un site de quiz, où les utilisateurs pourront créer leur propre Quiz et participé à ceux des autres membres.
 
 Le projet choisit devra obligatoirement se composer :
-* d’unebase de données
-* utilisationde librairie JavaScript
-* d’unsystème d’authentificationdifficulté:2
-* des pages permettant à l’administrateur de:difficulté:5
+* d’une base de données
+* utilisation de librairie JavaScript
+* d’un système d’authentification
+* des pages permettant à l’administrateur de:
     * gérer les utilisateurs 
     * gérer le contenu 
-* des pages permettant aux utilisateursde :difficulté:5
+* des pages permettant aux utilisateursde :
     * modifier leur profil
     * gérer le contenu
-* desfonctionnalités mettant en avant vos compétences enalgorithmie
-* envoide maildifficulté:2
+* des fonctionnalités mettant en avant vos compétences en algorithmie
+* envoi de mail
 
 ## Techno utilisé
   * Laravel
