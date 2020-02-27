@@ -21,6 +21,7 @@ Le projet choisit devra obligatoirement se composer :
   * Mysql
   * Bootstrap
   * NodeJS
+  * PHP
 
 ## Fonctionnalités 
 
