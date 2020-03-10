@@ -15,12 +15,17 @@ class CreateQuizTable extends Migration
     {
         Schema::create('quiz', function (Blueprint $table) {
             $table->bigIncrements('QuizId');
-            $table->foreign('CategoryId')->references('CategoryId')->on('category');
-            $table->foreign('CreatorId')->references('UserId')->on('users');
+            $table->bigInteger('RCategoryId')->unsigned()->nullable();
+            $table->foreign('RCategoryId')
+                ->references('CategoryId')
+                ->on('category');
+            $table->bigInteger('RCreatorId')->unsigned()->nullable();
+            $table->foreign('RCreatorId')
+                ->references('UserId')
+                ->on('users');
             $table->integer('NoteAvg');
 
-            $table->timestamps('CreatedAt');
-            $table->timestamps('UpdateAt');
+            $table->timestamps();
         });
     }
 

@@ -15,7 +15,10 @@ class CreateProfileTable extends Migration
     {
         Schema::create('profile', function (Blueprint $table) {
             $table->bigIncrements('ProfileId');
-            $table->foreign('UserId')->references('UserId')->on('users');
+            $table->bigInteger('RUserId')->unsigned()->nullable();
+            $table->foreign('RUserId')
+                ->references('UserId')
+                ->on('users');
             $table->char('Pseudo', 160);
         });
     }
