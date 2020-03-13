@@ -14,16 +14,16 @@ class CreateQuizTable extends Migration
     public function up()
     {
         Schema::create('quiz', function (Blueprint $table) {
-            $table->bigIncrements('QuizId');
+            $table->bigIncrements('quizId');
             $table->bigInteger('RCategoryId')->unsigned()->nullable();
             $table->foreign('RCategoryId')
-                ->references('CategoryId')
+                ->references('categoryId')
                 ->on('category');
             $table->bigInteger('RCreatorId')->unsigned()->nullable();
             $table->foreign('RCreatorId')
-                ->references('UserId')
+                ->references('userId')
                 ->on('users');
-            $table->integer('NoteAvg');
+            $table->integer('noteAvg');
 
             $table->timestamps();
         });

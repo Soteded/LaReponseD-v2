@@ -14,15 +14,15 @@ class CreateChoixTable extends Migration
     public function up()
     {
         Schema::create('choix', function (Blueprint $table) {
-            $table->bigIncrements('ChoixId');
-            $table->bigInteger('QuestionId')->unsigned()->nullable();
-            $table->foreign('QuestionId')
-                ->references('QuestionId')
+            $table->bigIncrements('choixId');
+            $table->bigInteger('RQuestionId')->unsigned()->nullable();
+            $table->foreign('RQuestionId')
+                ->references('questionId')
                 ->on('questions');
-            $table->string('ChoixJuste');
-            $table->string('Choix2');
-            $table->string('Choix3');
-            $table->string('Choix4');
+            $table->string('choixJuste');
+            $table->string('choix2');
+            $table->string('choix3');
+            $table->string('choix4');
         });
     }
 

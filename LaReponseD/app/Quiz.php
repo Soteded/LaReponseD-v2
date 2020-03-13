@@ -6,13 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Quiz extends Model
 {
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+
+    public function user() {
+        return $this->hasOne('App\User');
+    }
+    public function questions() {
+        return $this->hasMany(Question::class, 'quiz_id', 'id');
+    }
+
     protected $fillable = [
-        'Category', 'CreatorId', 'NoteAvg'
+        'Titre',
+        'Category', 
+        'CreatorId', 
+        'NoteAvg'
     ];
 
     /**

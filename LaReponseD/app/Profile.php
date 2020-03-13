@@ -11,6 +11,10 @@ class Profile extends Model
      *
      * @var array
      */
+    public function user() {
+        return $this->hasOne('App\User');
+    }
+
     protected $fillable = [
         'UserId', 'Avatar', 'Pseudo'
     ];

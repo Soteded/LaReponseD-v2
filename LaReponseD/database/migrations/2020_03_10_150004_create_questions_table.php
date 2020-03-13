@@ -14,11 +14,11 @@ class CreateQuestionsTable extends Migration
     public function up()
     {
         Schema::create('questions', function (Blueprint $table) {
-            $table->bigIncrements('QuestionId');
-            $table->string('Question');
-            $table->bigInteger('QuizId')->unsigned()->nullable();
-            $table->foreign('QuizId')
-                ->references('QuizId')
+            $table->bigIncrements('questionId');
+            $table->string('question');
+            $table->bigInteger('RQuizId')->unsigned()->nullable();
+            $table->foreign('RQuizId')
+                ->references('quizId')
                 ->on('quiz');
         });
     }
