@@ -17,7 +17,7 @@ class CreateUsernotequizTable extends Migration
             $table->bigIncrements('userNoteQuizId');
             $table->bigInteger('RUserId')->unsigned()->nullable();
             $table->foreign('RUserId')
-                ->references('userId')
+                ->references('id')
                 ->on('users');
             $table->bigInteger('RQuizId')->unsigned()->nullable();
             $table->foreign('RQuizId')

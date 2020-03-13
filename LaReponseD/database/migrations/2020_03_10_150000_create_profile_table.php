@@ -17,7 +17,7 @@ class CreateProfileTable extends Migration
             $table->bigIncrements('profileId');
             $table->bigInteger('RUserId')->unsigned()->nullable();
             $table->foreign('RUserId')
-                ->references('userId')
+                ->references('id')
                 ->on('users');
             $table->char('pseudo', 160);
             $table->string('avatar')->default('user.jpg');

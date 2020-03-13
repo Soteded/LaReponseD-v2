@@ -21,7 +21,7 @@ class CreateQuizTable extends Migration
                 ->on('category');
             $table->bigInteger('RCreatorId')->unsigned()->nullable();
             $table->foreign('RCreatorId')
-                ->references('userId')
+                ->references('id')
                 ->on('users');
             $table->integer('noteAvg');
 
