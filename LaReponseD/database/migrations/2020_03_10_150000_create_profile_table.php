@@ -20,7 +20,7 @@ class CreateProfileTable extends Migration
                 ->references('UserId')
                 ->on('users');
             $table->char('Pseudo', 160);
-            $table->string('avatar')->default('user.jpg');
+            $table->string('Avatar')->default('user.jpg');
         });
     }
 
