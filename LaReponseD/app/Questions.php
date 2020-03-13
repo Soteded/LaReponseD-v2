@@ -13,7 +13,7 @@ class Questions extends Model
     
     public function choix()
     {
-        return $this->hasOne(Choix::class, 'question_id', 'id');
+        return $this->hasOne(Choix::class, 'questionId', 'id');
     }
 
     protected $fillable = [
