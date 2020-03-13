@@ -23,7 +23,9 @@ class CreateQuizTable extends Migration
             $table->foreign('RCreatorId')
                 ->references('id')
                 ->on('users');
+            $table->string('titre');
             $table->integer('noteAvg');
+            $table->integer('compteur')->default(0);
 
             $table->timestamps();
         });

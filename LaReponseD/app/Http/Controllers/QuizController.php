@@ -16,25 +16,25 @@ class QuizController extends Controller
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('quizBlade.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $validatedQuiz = $request->validate([
+            'titre' => 'required',
+        ]);
+
+        $newQuiz = new Quiz;
+
+        $newQuiz->titre = $request->titre;
+        $newQuiz->user_id = Auth::user()->id;
+
+        $newQuiz->save();
+
+        return view('quizBlade.question.create', ['quiz' => $newQuiz]);
     }
 
     /**
