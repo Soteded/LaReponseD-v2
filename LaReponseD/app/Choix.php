@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Choix extends Model
 {
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+
+    public function question() {
+        return $this->hasOne('App\Question');
+    }
+    
     protected $fillable = [
-        'QuestionId', 'ChoixJuste', 'Choix2', 'Choix3', 'Choix4'
+        'questionId', 'choixJuste', 'choix2', 'choix3', 'choix4'
     ];
 
     /**

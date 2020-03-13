@@ -13,29 +13,19 @@ class User extends Authenticatable
     public function profile() {
         return $this->hasOne('App\Profile');
     }
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+
+    public function quiz() {
+        return $this->hasMany('App\Quiz');
+    }
+
     protected $fillable = [
         'name', 'email', 'password',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password', 'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];

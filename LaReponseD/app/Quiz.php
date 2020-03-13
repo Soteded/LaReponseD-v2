@@ -10,15 +10,19 @@ class Quiz extends Model
     public function user() {
         return $this->hasOne('App\User');
     }
+    public function category() {
+        return $this->hasOne('App\Category');
+    }
+
     public function questions() {
-        return $this->hasMany(Question::class, 'quiz_id', 'id');
+        return $this->hasMany(Question::class, 'quizId', 'id');
     }
 
     protected $fillable = [
-        'Titre',
-        'Category', 
-        'CreatorId', 
-        'NoteAvg'
+        'titre',
+        'category', 
+        'creatorId', 
+        'noteAvg'
     ];
 
     /**

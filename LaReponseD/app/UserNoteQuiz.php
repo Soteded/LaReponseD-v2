@@ -6,13 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserNoteQuiz extends Model
 {
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+
+    public function user() {
+        return $this->hasOne('App\User');
+    }
+
+    public function quiz() {
+        return $this->hasOne('App\Quiz');
+    }
+    
     protected $fillable = [
-        'Note','Titre','Corps'
+        'note','titre','corps'
     ];
 
     /**

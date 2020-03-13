@@ -6,29 +6,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class Questions extends Model
 {
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    public function quiz()
+    {
+        return $this->hasOne('App\Quiz');
+    }
+    
+    public function choix()
+    {
+        return $this->hasOne(Choix::class, 'question_id', 'id');
+    }
+
     protected $fillable = [
-        'Question', 'QuizId'
+        'question', 'quizId'
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
     protected $casts = [
         
     ];
