@@ -14,3 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::middleware ('auth', 'verified')->group (function () {
+    Route::resource ('image', 'ImageController', [
+        'only' => ['create', 'store', 'destroy', 'update']
+    ]);
+});
