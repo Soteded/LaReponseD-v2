@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserNoteQuiz extends Model
 {
+    protected $table = 'usernotequiz';
+    protected $primaryKey = 'usernotequizId';
 
     public function user() {
         return $this->hasOne('App\User');

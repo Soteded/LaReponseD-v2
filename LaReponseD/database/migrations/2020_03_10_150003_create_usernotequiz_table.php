@@ -15,8 +15,8 @@ class CreateUsernotequizTable extends Migration
     {
         Schema::create('usernotequiz', function (Blueprint $table) {
             $table->bigIncrements('userNoteQuizId');
-            $table->bigInteger('RUserId')->unsigned()->nullable();
-            $table->foreign('RUserId')
+            $table->bigInteger('userPostId')->unsigned()->nullable();
+            $table->foreign('userPostId')
                 ->references('id')
                 ->on('users');
             $table->bigInteger('RQuizId')->unsigned()->nullable();

@@ -19,8 +19,8 @@ class CreateQuizTable extends Migration
             $table->foreign('RCategoryId')
                 ->references('categoryId')
                 ->on('category');
-            $table->bigInteger('RCreatorId')->unsigned()->nullable();
-            $table->foreign('RCreatorId')
+            $table->bigInteger('CreatorId')->unsigned()->nullable();
+            $table->foreign('CreatorId')
                 ->references('id')
                 ->on('users');
             $table->string('titre');

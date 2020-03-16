@@ -13,15 +13,21 @@ class CreateProfileTable extends Migration
      */
     public function up()
     {
-        Schema::create('profile', function (Blueprint $table) {
-            $table->bigIncrements('profileId');
-            $table->bigInteger('RUserId')->unsigned()->nullable();
-            $table->foreign('RUserId')
-                ->references('id')
-                ->on('users');
-            $table->char('pseudo', 160);
-            $table->string('avatar')->default('user.jpg');
-        });
+        if (!Schema::hasTable('profile')) {
+            Schema::create('profile', function (Blueprint $table) {
+                $table->bigIncrements('profileId');
+                $table->char('pseudo', 160);
+                $table->date('birthDate');
+                $table->string('telNbr', 32);
+                $table->string('address', 250);
+                $table->string('avatar')->default('user.jpg');
+                $table->bigInteger('userId')->unsigned()->nullable();
+                $table->foreign('userId')
+                    ->references('id')
+                    ->on('users');
+                $table->timestamps();
+            });
+        }   
     }
 
     /**

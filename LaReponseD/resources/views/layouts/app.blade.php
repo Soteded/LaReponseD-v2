@@ -1,3 +1,7 @@
+<?php
+    use App\Profile;
+?>
+
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -11,13 +15,63 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/sidebar.js') }}" defer></script>
+    <script src="{{ asset('js/darkmode.js') }}" defer></script>
+    <script src="https://kit.fontawesome.com/e8767330e3.js" crossorigin="anonymous"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/sidebar.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/darkmode.css') }}" rel="stylesheet" type="text/css">
+    <style>
+        html, body {
+            background-color: #fff;
+            color: #636b6f;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 200;
+            height: 100vh;
+            margin: 0;
+        }
+        .full-height {
+            height: 100vh;
+        }
+        .flex-center {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+        }
+        .position-ref {
+            position: relative;
+        }
+        .top-right {
+            position: absolute;
+            right: 10px;
+            top: 18px;
+        }
+        .content {
+            text-align: center;
+        }
+        .title {
+            font-size: 84px;
+        }
+        .links > a {
+            color: #636b6f;
+            padding: 0 25px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: .1rem;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+        .m-b-md {
+            margin-bottom: 30px;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
@@ -55,12 +109,19 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('home') }}"
+                                       onclick="event.preventDefault();
+                                            document.getElementById('home-form').submit();">
+                                        {{ __('Home') }}
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                            document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-
+                                    <form id="home-form" action="{{ route('home') }}" method="GET" style="display: none;">
+                                        @csrf
+                                    </form>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
@@ -71,8 +132,7 @@
                 </div>
             </div>
         </nav>
-
-        <main class="py-4">
+        <main class="container py-4">
             @yield('content')
         </main>
     </div>

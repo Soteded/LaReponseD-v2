@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Questions extends Model
 {
+    protected $table = 'questions';
+    protected $primaryKey = 'questionsId';
+
     public function quiz()
     {
         return $this->hasOne('App\Quiz');
