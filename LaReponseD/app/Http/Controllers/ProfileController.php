@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Profile;
+use Carbon\Carbon;
 
 class ProfileController extends Controller
 {
@@ -23,7 +26,29 @@ class ProfileController extends Controller
      */
     public function create()
     {
-        //
+        $profiles = Profile::all();
+
+        foreach ($profiles as $profile) {
+
+            if ( $profile['userId'] === Auth::user()->id ) {
+                return redirect('/home')->with('alert', 'Vous avez déjà un profile :(');
+            }
+        }
+
+        return view('profileBlade.create');
+
+        die();
+
+        if (Profile::where('userId', '=', Auth::user()->id)) {
+            echo ('J\' ai déjà un profile');
+            die();
+            return view('profileBlade.create');
+            //return redirect('/home')->with('alert', 'Vous avez déjà un profile :(');
+        } else {
+            echo ('J\' ai pas un profile :(');
+            die();
+            return view('profileBlade.create');
+        }
     }
 
     /**
@@ -34,7 +59,25 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $current_date_time = Carbon::now()->toDateTimeString();
+
+        $validatedProfile = $request->validate([
+            'pseudo' => 'required',
+            'birthDate' => 'required',
+        ]);
+
+        $newProfile = new Profile;
+
+        $newProfile->pseudo = $request->pseudo;
+        $newProfile->birthDate = $request->birthDate;
+        $newProfile->userId = Auth::user()->id;
+
+        $newProfile->created_at = $current_date_time;
+        $newProfile->updated_at = $current_date_time;
+
+        $newProfile->save();
+
+        return redirect('/home')->with('success', 'Profil créé avec succès !');
     }
 
     /**

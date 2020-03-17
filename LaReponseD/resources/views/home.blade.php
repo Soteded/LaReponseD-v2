@@ -16,7 +16,7 @@
         @endif
             <div class="card">
                 <div class="card-header">
-                    <h2 class="float-left">Dashboard</h2>
+                    <h2 class="float-left">Main Menu</h2>
                     <button type="button" class="btn btn-primary float-right" onclick="window.location='{{ url('quiz/create') }}'">Créer un quiz</button>
                 </div>
 
@@ -26,7 +26,6 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
                     <p>Hey, re ! :)</p>
 
                     <h5>Tes quizs ont été joués :</h5>

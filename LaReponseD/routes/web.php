@@ -19,4 +19,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard')->middleware('auth','role:Admin');
+
+Route::resource('profile', 'ProfileController');
+Route::get('/profile/create', 'ProfileController@create');
+
 Route::get('/createQuiz', 'QuizController@create')->name('createQuiz');

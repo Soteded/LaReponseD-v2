@@ -129,7 +129,7 @@
         @if (Auth::check())
         <?php
             $id = Auth::user()->id;
-            $profile = Profile::where('profileId', $id)->first();
+            $profile = Profile::where('userId', $id)->first();
         ?>
         <div class="page-wrapper chiller-theme">
             <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
@@ -149,25 +149,28 @@
                         alt="User picture">
                     </div>
                     <div class="user-info">
-                    <span class="user-name">
-                        <span class="firstName">{{ $profile->pseudo }}</span>
-                    </span>
-                    <span class="user-role"></span>
-                    <span class="user-status">
-                        <i class="fa fa-circle"></i>
-                        <span>Online</span>
-                    </span>
+                        <span class="user-status">{{ Auth::user()->roles->first()['name'] }}</span>
+                        <span class="user-name">
+                            <span class="pseudo">{{ $profile->pseudo }}</span>
+                        </span>
+                        <span class="user-role"></span>
+                        <span class="user-status">
+                            <i class="fa fa-circle"></i>
+                            <span>Online</span>
+                        </span>
                     </div>
                 </div>
                 <!-- sidebar-header  -->
                 <div class="sidebar-menu">
                     <ul>
+                        @hasrole('Admin')
                         <li class="">
-                            <a href="{{ route('home') }}">
+                            <a href="{{ route('dashboard') }}">
                             <i class="fa fa-tachometer-alt"></i>
                             <span>Dashboard</span>
                             </a>
                         </li>
+                        @endhasrole
                         <li class="header-menu">
                             <span>General</span>
                         </li>
