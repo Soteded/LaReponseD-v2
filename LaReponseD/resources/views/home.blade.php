@@ -40,7 +40,7 @@
                         <tbody>
                             <tr>
                                 <?php
-                                    $quizs = DB::table('quiz')->where('user_id','LIKE',Auth::user()->id)->get();
+                                    $quizs = DB::table('quiz')->where('CreatorId','LIKE',Auth::user()->id)->get();
                                     $quizs = json_decode(json_encode($quizs), true);
                                     foreach ($quizs as $quiz) {?>
                                         <td class="text-center">{{ $quiz["titre"] }}</td>

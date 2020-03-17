@@ -11,7 +11,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'LaRéponseD') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -114,15 +114,7 @@
                                             document.getElementById('home-form').submit();">
                                         {{ __('Home') }}
                                     </a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                            document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
                                     <form id="home-form" action="{{ route('home') }}" method="GET" style="display: none;">
-                                        @csrf
-                                    </form>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
                                 </div>
@@ -132,9 +124,164 @@
                 </div>
             </div>
         </nav>
-        <main class="container py-4">
-            @yield('content')
-        </main>
+
+        @if (Auth::check())
+        <?php
+            $id = Auth::user()->id;
+            $profile = Profile::where('profileId', $id)->first();
+        ?>
+        <div class="page-wrapper chiller-theme">
+            <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+                <i class="fas fa-bars"></i>
+            </a>
+            <nav id="sidebar" class="sidebar-wrapper">
+                <div class="sidebar-content">
+                <div class="sidebar-brand">
+                    <a href="#">La Réponse D</a>
+                    <div id="close-sidebar">
+                    <i class="fas fa-times"></i>
+                    </div>
+                </div>
+                <div class="sidebar-header">
+                    <div class="user-pic">
+                    <img class="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
+                        alt="User picture">
+                    </div>
+                    <div class="user-info">
+                    <span class="user-name">
+                        <span class="firstName">{{ $profile->pseudo }}</span>
+                    </span>
+                    <span class="user-role"></span>
+                    <span class="user-status">
+                        <i class="fa fa-circle"></i>
+                        <span>Online</span>
+                    </span>
+                    </div>
+                </div>
+                <!-- sidebar-header  -->
+                <div class="sidebar-menu">
+                    <ul>
+                        <li class="header-menu">
+                            <span>General</span>
+                        </li>
+                        <li class="">
+                            <a href="{{ route('home') }}">
+                            <i class="fa fa-tachometer-alt"></i>
+                            <span>Home</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-dropdown">
+                            <a href="#">
+                            <i class="fas fa-user-friends"></i>
+                            <span>Profile</span>
+                            </a>
+                            <div class="sidebar-submenu">
+                            <ul>
+                                <li>
+                                @hasrole('Admin')
+                                <a class="dropdown-item fas fa-user" href="#"
+                                    onclick="event.preventDefault();
+                                        document.getElementById('index-form').submit();">
+                                    {{ __('All Profiles') }}
+                                </a>
+                                <form id="index-form" action="#" method="GET" style="display: none;">
+                                    @csrf
+                                </form>
+                                @endhasrole
+                                </li>
+                                <li>
+                                <a class="dropdown-item" href="{{ url('profiles/'.Auth::id()) }}"
+                                    onclick="event.preventDefault();
+                                    document.getElementById('show-form').submit();">
+                                    {{ __('Profile') }}
+                                </a>
+                                <form id="show-form" action="{{ url('profiles/'.Auth::id()) }}" method="GET" style="display: none;">
+                                    @csrf
+                                </form>
+                                </li>
+                                <li>
+                                <a class="dropdown-item" href="#"
+                                    onclick="event.preventDefault();
+                                        document.getElementById('edit-form').submit();">
+                                    {{ __('Edit Profile') }}
+                                </a>
+                                <form id="edit-form" action="#" method="EDIT" style="display: none;">
+                                    @csrf
+                                </form>
+                                </li>
+                            </ul>
+                            </div>
+                        </li>
+                        <li class="header-menu">
+                            <span>Quizz</span>
+                        </li>
+                        <li class="">
+                            <a href="#">
+                            <i class="fas fa-question-circle"></i>
+                            <span>Tous les quizz</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="#">
+                            <i class="fas fa-question-circle"></i>
+                            <span>Categories</span>
+                            </a>
+                        </li>
+                        <?php
+                            $categories = DB::table('quiz')->select('RCategoryId')->distinct()->get();
+                            $array = json_decode(json_encode($categories), true);
+                            foreach ($array as $oui) {?>
+                                <li class="">
+                                    <a href="{{ url('/quiz/categorie/'.$oui['RCategoryId']) }}">
+                                    <i class="fas fa-question-circle"></i>
+                                    <span class="badge badge-pill badge-success notification">
+                                        <?php
+                                            $count = DB::table('quiz')->select(DB::raw('count(*) as count'))->groupBy('RCategoryId')->where('RCategoryId','LIKE',$oui['RCategoryId'])->get();
+                                            $count = json_decode(json_encode($count), true);
+                                            echo $count[0]["count"];
+                                        ?> 
+                                    </span>
+                                    <span>{{ $oui["RCategoryId"] }}</span>
+                                    </a>
+                                </li>
+                            <?php
+                            }
+                        ?>
+                        <li class="header-menu">
+                            <span>Créer son quizz</span>
+                        </li>
+                        <li class="">
+                            <a href="#">
+                            <i class="fas fa-plus"></i>
+                            <span>Ici</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- sidebar-menu  -->
+                </div>
+                <!-- sidebar-content  -->
+                <div class="sidebar-footer">
+                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <i class="fa fa-power-off"></i>
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+                </div>
+            </nav>
+            <!-- sidebar-wrapper  -->
+            <main class="container py-4">
+                @yield('content')
+            </main>
+            <!-- page-content" -->
+        </div>
+        <!-- page-wrapper -->
+        @else
+            <main class="container py-4">
+                @yield('content')
+            </main>
+        @endif
     </div>
-</body>
+    </body>
 </html>

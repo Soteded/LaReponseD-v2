@@ -49654,15 +49654,27 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/sass/sidebar.scss":
+/*!*************************************!*\
+  !*** ./resources/sass/sidebar.scss ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ 0:
-/*!*************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ***!
-  \*************************************************************/
+/*!*******************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/sidebar.scss ***!
+  \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! D:\Workspace\B2\ProjetWeb-LaReponseD_-_v2\LaReponseD\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Workspace\B2\ProjetWeb-LaReponseD_-_v2\LaReponseD\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Workspace\B2\ProjetWeb-LaReponseD_-_v2\LaReponseD\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! D:\Workspace\B2\ProjetWeb-LaReponseD_-_v2\LaReponseD\resources\sass\sidebar.scss */"./resources/sass/sidebar.scss");
 
 
 /***/ })

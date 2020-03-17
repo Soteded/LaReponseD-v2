@@ -93,37 +93,37 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-    $(".sidebar-dropdown > a").click(function () {
-        $(".sidebar-submenu").slideUp(200);
-      
-        if ($(this).parent().hasClass("active")) {
-          $(".sidebar-dropdown").removeClass("active");
-          $(this).parent().removeClass("active");
-        } else {
-          $(".sidebar-dropdown").removeClass("active");
-          $(this).next(".sidebar-submenu").slideDown(200);
-          $(this).parent().addClass("active");
-        }
-      });
-      $("#close-sidebar").click(function () {
-        $(".page-wrapper").removeClass("toggled");
-      });
-      $("#show-sidebar").click(function () {
-        $(".page-wrapper").addClass("toggled");
-      });
-      
-      /***/ }),
-      
-      /***/ 1:
-      /*!***************************************!*\
-        !*** multi ./resources/js/sidebar.js ***!
-        \***************************************/
-      /*! no static exports found */
-      /***/ (function(module, exports, __webpack_require__) {
-      
-      module.exports = __webpack_require__(/*! C:\Users\User\Documents\Ynov\B2\WebDev\PHP\ProjetQuizz\LaReponseD\LaReponseD\resources\js\sidebar.js */"./resources/js/sidebar.js");
-      
-      
-      /***/ })
-      
-      /******/ });
+$(".sidebar-dropdown > a").click(function () {
+  $(".sidebar-submenu").slideUp(200);
+
+  if ($(this).parent().hasClass("active")) {
+    $(".sidebar-dropdown").removeClass("active");
+    $(this).parent().removeClass("active");
+  } else {
+    $(".sidebar-dropdown").removeClass("active");
+    $(this).next(".sidebar-submenu").slideDown(200);
+    $(this).parent().addClass("active");
+  }
+});
+$("#close-sidebar").click(function () {
+  $(".page-wrapper").removeClass("toggled");
+});
+$("#show-sidebar").click(function () {
+  $(".page-wrapper").addClass("toggled");
+});
+
+/***/ }),
+
+/***/ 1:
+/*!***************************************!*\
+  !*** multi ./resources/js/sidebar.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! D:\Workspace\B2\ProjetWeb-LaReponseD_-_v2\LaReponseD\resources\js\sidebar.js */"./resources/js/sidebar.js");
+
+
+/***/ })
+
+/******/ });
