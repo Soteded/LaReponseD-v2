@@ -2,83 +2,42 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-
+use App\Profile;
+use App\User;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Traits\HasRoles;
 class RoleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+    public function setRole(Request $request) {
+        //dd($request->all());
+        //return view('profileBlade.show', ['profile' => $profile])->with('success','Bravo, vous avez changé le role de timothéLeModo !');
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+        $truc = $request->aled;
+        
+        //dd($truc);
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        $profile = Profile::where('id', $request->profileId)->first();
+        $user = User::where('id',$request->profileId)->first();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        if ($truc == 'moderator') {
+            $newRole = Role::where('name', 'Modo')->first();
+            $user->roles()->detach();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+            $user->assignRole($newRole);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+            return redirect()->route('show', ['id' => $profile->id])->with('success',"$profile->firstName $profile->lastName est devenu un modérateur");
+        } elseif ($truc == 'user') {
+            $newRole = Role::where('name', 'User')->first();
+            $user->roles()->detach();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+            $user->assignRole($newRole);
+
+            return redirect()->route('show', ['id' => $profile->id])->with('success',"$profile->firstName $profile->lastName est devenu un utilisateur");
+        } else {
+            print($truc.'rien');
+        }
+        
     }
 }
