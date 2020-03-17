@@ -2,7 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Question;
+use App\Quiz;
+use View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use http\Exception\InvalidArgumentException;
+use function Symfony\Component\HttpKernel\Tests\Controller\controller_function;
+use function Symfony\Component\HttpKernel\Tests\controller_func;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class QuizController extends Controller
 {
@@ -30,7 +39,7 @@ class QuizController extends Controller
         $newQuiz = new Quiz;
 
         $newQuiz->titre = $request->titre;
-        $newQuiz->user_id = Auth::user()->id;
+        $newQuiz->userId = Auth::user()->id;
 
         $newQuiz->save();
 
