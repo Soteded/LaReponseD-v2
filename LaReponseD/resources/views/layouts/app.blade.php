@@ -163,12 +163,18 @@
                 <!-- sidebar-header  -->
                 <div class="sidebar-menu">
                     <ul>
+                        <li class="">
+                            <a href="{{ route('home') }}">
+                            <i class="fa fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                            </a>
+                        </li>
                         <li class="header-menu">
                             <span>General</span>
                         </li>
                         <li class="">
                             <a href="{{ route('home') }}">
-                            <i class="fa fa-tachometer-alt"></i>
+                            <i class="fa fa-home"></i>
                             <span>Home</span>
                             </a>
                         </li>
