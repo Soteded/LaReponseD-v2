@@ -49672,9 +49672,9 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Workspace\B2\ProjetWeb-LaReponseD_-_v2\LaReponseD\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! D:\Workspace\B2\ProjetWeb-LaReponseD_-_v2\LaReponseD\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! D:\Workspace\B2\ProjetWeb-LaReponseD_-_v2\LaReponseD\resources\sass\sidebar.scss */"./resources/sass/sidebar.scss");
+__webpack_require__(/*! Y:\B2\LaReponseD-v2\LaReponseD\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! Y:\B2\LaReponseD-v2\LaReponseD\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! Y:\B2\LaReponseD-v2\LaReponseD\resources\sass\sidebar.scss */"./resources/sass/sidebar.scss");
 
 
 /***/ })
