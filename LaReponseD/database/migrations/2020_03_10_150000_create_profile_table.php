@@ -18,8 +18,6 @@ class CreateProfileTable extends Migration
                 $table->bigIncrements('profileId');
                 $table->char('pseudo', 160);
                 $table->date('birthDate');
-                $table->string('telNbr', 32);
-                $table->string('address', 250);
                 $table->string('avatar')->default('user.jpg');
                 $table->bigInteger('userId')->unsigned()->nullable();
                 $table->foreign('userId')

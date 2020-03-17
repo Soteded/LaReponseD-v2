@@ -9,7 +9,5 @@ $factory->define(App\Profile::class, function (Faker $faker) {
     return [
         'pseudo' => $faker->name,
         'birthDate' => $faker->dateTimeThisCentury->format('Y-m-d'),
-        'telNbr' => $faker->phoneNumber,
-        'address' => $faker->address,
     ];
 });
