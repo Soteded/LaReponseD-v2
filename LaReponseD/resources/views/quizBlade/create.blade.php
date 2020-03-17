@@ -1,4 +1,5 @@
 @extends('layouts.app')
+<script src="{{ asset('js/quiz/utils.js') }}" defer></script>
 
 @section('content')
     <style>
