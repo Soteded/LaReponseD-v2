@@ -24,4 +24,5 @@ Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard')->middlew
 Route::resource('profile', 'ProfileController');
 Route::get('/profile/create', 'ProfileController@create');
 
-Route::get('/createQuiz', 'QuizController@create')->name('createQuiz');
+Route::get('/quiz/createQuiz', 'QuizController@create')->name('createQuiz');
+Route::get('/quiz/show', 'QuizController@show')->name('show');

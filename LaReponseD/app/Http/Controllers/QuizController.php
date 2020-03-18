@@ -51,9 +51,10 @@ class QuizController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $quiz = Quiz::with('questions.choix');
+        return view('quizBlade.show', ['quiz' => $quiz]);
     }
 
     /**
