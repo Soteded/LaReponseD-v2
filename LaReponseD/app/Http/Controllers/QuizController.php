@@ -43,7 +43,6 @@ class QuizController extends Controller
 
         $newQuiz->save();
 
-        return view('quizBlade.question.create', ['quiz' => $newQuiz]);
     }
 
     /**

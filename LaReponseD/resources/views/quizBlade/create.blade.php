@@ -24,7 +24,7 @@
                 </div><br />
             @endif
 
-            <div class="page">
+            <div id="quiz" class="page">
             
                 <form method="post">
                     @csrf
@@ -35,21 +35,14 @@
                     </div>
 
                     <!-- THEME DU QUIZs -->
-                    <label for="theme">Thème :</label>
-                    <select name="theme" id="theme" required>
-                        <option value="">--Please choose an option--</option>
-                        <option value="cuisine">cuisine</option>
-                        <option value="jeu">jeu</option>
-                        <option value="internet">internet</option>
-                        <option value="sport">sport</option>
-                    </select></br></br>
 
+                        
                     <!-- <button type="submit" class="btn btn-primary">Créer</button> -->
                     <a href="#question/1" class="btn btn-primary"> Suivant</a>
                 </form>
             </div>
 
-            <div class="page" style="display: none;">
+            <div id="question" class="page" style="display: none;">
                 <form method="post"  >
                     @csrf
 
