@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Question;
 use App\Quiz;
+use App\Category;
 use View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,7 +28,8 @@ class QuizController extends Controller
 
     public function create()
     {
-        return view('quizBlade.create');
+        $categorys = Category::all();
+        return view('quizBlade.create', ['categorys' => $categorys]);
     }
 
     public function store(Request $request)
