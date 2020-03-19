@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Category;
 
 class CategoryTableSeeder extends Seeder
 {
@@ -17,6 +18,7 @@ class CategoryTableSeeder extends Seeder
             'Livre',
             'Série',
         );
+
         foreach ($allCategory as $category) {
             Category::create(['categoryName'=> $category]);
         }
