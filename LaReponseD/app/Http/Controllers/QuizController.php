@@ -43,10 +43,11 @@ class QuizController extends Controller
 
         $newQuiz->titre = $request->titre;
         $newQuiz->RCategoryId = $request->theme;
-        //$newQuiz->userId = Auth::user()->id;
+        $newQuiz->CreatorId = Auth::user()->id;
 
         $newQuiz->save();
-
+        
+        return view('quizBlade.questionBlade.create', ['quiz' => $newQuiz]);
     }
 
     /**

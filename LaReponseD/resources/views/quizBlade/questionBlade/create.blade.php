@@ -19,36 +19,45 @@
             <!-- Formulaire à droite -->
             <div class="col no-gutters">
                 <div class="card-body" style="background:red; width:100%; height:100%;">
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div><br />
-                    @endif
-        
-                    <form method="post" action="{{ route('quiz.store') }}">
+                    <form method="post" action="{{ route('question.store') }}">
                         @csrf
-                        <!-- TITRE DU QUIZs -->
+
+                        <!--##############################-->
+                        <!--           QUESTION           -->
                         <div class="form-group">
-                            <label for="titre">Titre :</label>
-                            <input type="text" class="form-control" id="titre" name="titre" required/>
+                            <label for="name">Question :</label>
+                            <input type="text" class="form-control" name="question" require/>
                         </div>
-        
-                        <!-- THEME DU QUIZs -->
-                        <label for="theme">Thème :</label>
-                        <select name="theme" id="theme" required>
-                            <option value="">--Please choose an option--</option>
-                            @foreach ($categorys as $category)
-                                <option value="{{$category->categoryId}}">{{$category->categoryName}}</option>
-                            @endforeach
-                        </select>
-        
-                        <button type="submit" class="btn btn-primary">Créer</button>
+
+                        <hr>
+
+                        <!-- REPONSE Juste DU QUIZs -->
+                        <div>
+                            <label for="name">Réponse 1 :</label>
+                            <input type="text" class="form-control" name="repJuste " require/>
+                        </div>
+
+                        <!-- REPONSE 1 DU QUIZs -->
+                        <div>
+                            <label for="name">Réponse 2 :</label>
+                            <input type="text" class="form-control" name="rep2" require/>
+                        </div>
+
+                        <!-- REPONSE 2 DU QUIZs -->
+                        <div>
+                            <label for="name">Réponse 3 :</label>
+                            <input type="text" class="form-control" name="rep3" require/>
+                        </div>
+
+                        <!-- REPONSE 3 DU QUIZs -->
+                        <div>
+                            <label for="name">Réponse 4 :</label>
+                            <input type="text" class="form-control" name="rep4" require/>
+                        </div>
+                        <!--##############################-->
+
+                        <button type="submit" class="btn btn-primary" name="action" value="next">Réponses</button>
                     </form>
-        
                 </div>
             </div>
         </div>

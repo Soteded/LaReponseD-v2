@@ -25,6 +25,8 @@ Route::resource('profile', 'ProfileController');
 Route::get('/profile/create', 'ProfileController@create');
 
 Route::get('/quiz/createQuiz', 'QuizController@create')->name('createQuiz');
+Route::get('/quiz/createQuestion', 'QuestionController@create')->name('createQuestion');
 Route::get('/quiz/show', 'QuizController@show')->name('show');
 
 Route::resource('quiz', 'QuizController');
+Route::resource('question', 'QuestionController');

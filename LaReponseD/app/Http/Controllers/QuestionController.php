@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Question;
+use App\Choix;
 use App\Quiz;
 use View;
 use Illuminate\Http\Request;
@@ -27,12 +28,12 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($quiz)
     {
         $current_id = Auth::user()->id;
         $quiz = Quiz::where('user_id', $current_id)->latest('created_at')->first();
 
-        return View::make('quizBlade.createQuest', ['quiz' => $quiz]);
+        return View::make('quizBlade.questionBlade.createQuest', ['quiz' => $quiz]);
     }
 
     /**
@@ -43,7 +44,27 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $current_id = Auth::user()->id;
+        $quiz = Quiz::where('CreatorId', $current_id)->latest('created_at')->first();
+    
+        if (isset($request->question) && isset($request->repJuste) && isset($request->rep2) && isset($request->rep3) && isset($request->rep4)) {
+            $newQuestion = new Question;
+
+            $newQuestion->question = $request->question;
+            $newQuestion->RQuizId = $quiz->quizId;
+
+            $newQuestion->save();
+
+            $listChoix = array('repJuste' => $request->request->get('repJuste'),
+                        'rep2' => $request->request->get('rep2'),
+                        'rep3' => $request->request->get('rep3'),
+                        'rep4' => $request->request->get('rep4'));
+
+            return redirect()->action('ChoixController@store', ['listChoix' => $listChoix]);
+        } else {
+            $messages = "Vous n'avez pas remplis tous les champs";
+            return view('quizBlade.question.create', ['quiz' => $quiz])->with('error','Vous n\'avez pas rentré tous les champs requis')->withErrors($messages);
+        }
     }
 
     /**
