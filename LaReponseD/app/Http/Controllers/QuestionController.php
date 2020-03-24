@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Question;
+use App\Questions;
 use App\Choix;
 use App\Quiz;
 use View;
@@ -49,7 +49,7 @@ class QuestionController extends Controller
         $quiz = Quiz::where('CreatorId', $current_id)->latest('created_at')->first();
 
         if (isset($request->question) && isset($request->repJuste) && isset($request->rep2) && isset($request->rep3) && isset($request->rep4)) {
-            $newQuestion = new Question;
+            $newQuestion = new Questions;
 
             $newQuestion->question = $request->question;
             $newQuestion->RQuizId = $quiz->quizId;
