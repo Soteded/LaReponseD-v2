@@ -37,38 +37,36 @@ class ChoixController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
         $current_id = Auth::user()->id;
-        $quiz = Quiz::where('user_id', $current_id)->latest('created_at')->first();
-        $question = Question::where('quiz_id', $quiz->id)->latest('created_at')->first();
+        $quiz = Quiz::where('CreatorId', $current_id)->latest('created_at')->first();
+        $question = Question::where('RQuizId', $quiz->quizid)->latest('created_at')->first();
 
-        $reponses = array($request->reponses[0],$request->reponses[1],$request->reponses[2],$request->reponses[3]);
+        $newchoix = new Choix;
 
-        $newRep = new Choix;
-
-        if (in_array($request->quest1, $reponses)) {
-            $j = 1;
-
-            for ($i=0; $i < sizeof($reponses); $i++) {
-                if ($reponses[$i] != $request->quest1) {
-                    $aled = "choix{$j}";
-                    $newRep->$aled = $reponses[$i];
-                    $j += 1;
-                } else {
-                    $newRep->choix0 = $reponses[$i];
-                }
+        foreach ($listChoix as $key => $choix) {
+            switch ($key) {
+                case 'repJuste':
+                    $newchoix->choixJuste = $choix;
+                    break;
+                case 'rep2':
+                    $newchoix->choix2 = $choix;
+                    break;
+                case 'rep3':
+                    $newchoix->choix3 = $choix;
+                    break;
+                case 'rep4':
+                    $newchoix->choix4 = $choix;
+                    break;
+                default:
+                    break;
             }
-            $newRep->question_id = $question->id;
-
-            $newRep->save();
-        } else {
-            $messages = "Veuillez choisir une option";
-            return view('quizBlade.choix.create', ['quiz' => $quiz,'question' => $question, 'reponses' => $reponses])->withErrors($messages);
         }
+        $newchoix->RQuestionId = $question->questionId;
 
         if ($_POST['action'] == 'again') {
-            return view('quizBlade.question.create', ['quiz' => $quiz]);
+            return view('quizBlade.questionBlade.create', ['quiz' => $quiz]);
         } else if ($_POST['action'] == 'end') {
             return redirect('home')->with('success','Bravo, vous avez cr?? votre quiz !');
         }

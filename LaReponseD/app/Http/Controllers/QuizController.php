@@ -36,15 +36,18 @@ class QuizController extends Controller
     {
         $validatedQuiz = $request->validate([
             'titre' => 'required',
+            'theme' => 'required',
         ]);
 
         $newQuiz = new Quiz;
 
         $newQuiz->titre = $request->titre;
-        $newQuiz->userId = Auth::user()->id;
+        $newQuiz->RCategoryId = $request->theme;
+        $newQuiz->CreatorId = Auth::user()->id;
 
         $newQuiz->save();
-
+        
+        return view('quizBlade.questionBlade.create', ['quiz' => $newQuiz]);
     }
 
     /**
