@@ -4,7 +4,15 @@
 @section('content')
 
         <div class="row no-gutters">
-
+            @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div><br />
+            @endif
             <!-- Affichage à gauche -->
             <div class="col no-gutters">
                 <div style="background:grey; width:100%; height:100%;">
@@ -56,7 +64,8 @@
                         </div>
                         <!--##############################-->
 
-                        <button type="submit" class="btn btn-primary">Réponses</button>
+                        <button type="submit" class="btn btn-primary" name="action" value="again">Again</button>
+                        <button type="submit" class="btn btn-primary" name="action" value="end">End</button>
                     </form>
                 </div>
             </div>

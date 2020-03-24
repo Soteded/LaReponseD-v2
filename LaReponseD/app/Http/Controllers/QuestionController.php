@@ -49,23 +49,30 @@ class QuestionController extends Controller
         $quiz = Quiz::where('CreatorId', $current_id)->latest('created_at')->first();
 
         if (isset($request->question) && isset($request->repJuste) && isset($request->rep2) && isset($request->rep3) && isset($request->rep4)) {
-            $newQuestion = new Questions;
+            //$newQuestion = ['question' => $request->question, 'RQuizId' => $quiz->quizId];
 
+            $newQuestion = new Questions;
             $newQuestion->question = $request->question;
             $newQuestion->RQuizId = $quiz->quizId;
-
             $newQuestion->save();
+            //$questionId = Questions::create($newQuestion)->lastInsertId();
+            $questionId = DB::getPdo()->lastInsertId();
+            $newChoix = new Choix;
+            $newChoix->RQuestionId = $questionId;
+            $newChoix->choixJuste = $request->repJuste;
+            $newChoix->choix2 = $request->rep2;
+            $newChoix->choix3 = $request->rep3;
+            $newChoix->choix4 = $request->rep4;
+            $newChoix->save();
 
-            $listChoix = array('repJuste' => $request->request->get('repJuste'),
-                        'rep2' => $request->request->get('rep2'),
-                        'rep3' => $request->request->get('rep3'),
-                        'rep4' => $request->request->get('rep4'));
-
-            //return view('test', ['quiz' => $quiz], ['question' => $newQuestion],['choix' => $listChoix] );
-            return redirect()->action('ChoixController@store', ['listChoix' => $listChoix]);
+            if ($_POST['action'] == 'again') {
+                return view('quizBlade.questionBlade.create', ['quiz' => $quiz]);
+            } else if ($_POST['action'] == 'end') {
+                return redirect('home')->with('success','Bravo, vous avez cr?? votre quiz !');
+            }
         } else {
             $messages = "Vous n'avez pas remplis tous les champs";
-            return view('quizBlade.questionBlade.create', ['quiz' => $quiz])->with('error','Vous n\'avez pas rentré tous les champs requis')->withErrors($messages);
+            return view('quizBlade.questionBlade.create', ['quiz' => $quiz])->withErrors($messages);
         }
     }
 
