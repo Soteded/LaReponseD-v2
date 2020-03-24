@@ -34,7 +34,7 @@
                         <!-- REPONSE Juste DU QUIZs -->
                         <div>
                             <label for="name">Réponse 1 :</label>
-                            <input type="text" class="form-control" name="repJuste " require/>
+                            <input type="text" class="form-control" name="repJuste" require/>
                         </div>
 
                         <!-- REPONSE 1 DU QUIZs -->
