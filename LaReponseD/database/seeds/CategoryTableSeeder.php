@@ -17,6 +17,14 @@ class CategoryTableSeeder extends Seeder
             'Film',
             'Livre',
             'Série',
+            'Ceci',
+            'Est',
+            'Un',
+            'Test',
+            'Donc',
+            'Voué',
+            'à',
+            'disparaitre',
         );
 
         foreach ($allCategory as $category) {

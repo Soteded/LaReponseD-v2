@@ -49654,6 +49654,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/sass/custom.scss":
+/*!************************************!*\
+  !*** ./resources/sass/custom.scss ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "./resources/sass/sidebar.scss":
 /*!*************************************!*\
   !*** ./resources/sass/sidebar.scss ***!
@@ -49666,15 +49677,16 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 0:
-/*!*******************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/sidebar.scss ***!
-  \*******************************************************************************************/
+/*!************************************************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/custom.scss ./resources/sass/sidebar.scss ***!
+  \************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! Y:\B2\LaReponseD-v2\LaReponseD\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! Y:\B2\LaReponseD-v2\LaReponseD\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! Y:\B2\LaReponseD-v2\LaReponseD\resources\sass\sidebar.scss */"./resources/sass/sidebar.scss");
+__webpack_require__(/*! D:\Workspace\B2\ProjetWeb-LaReponseD_-_v2\LaReponseD\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! D:\Workspace\B2\ProjetWeb-LaReponseD_-_v2\LaReponseD\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Workspace\B2\ProjetWeb-LaReponseD_-_v2\LaReponseD\resources\sass\custom.scss */"./resources/sass/custom.scss");
+module.exports = __webpack_require__(/*! D:\Workspace\B2\ProjetWeb-LaReponseD_-_v2\LaReponseD\resources\sass\sidebar.scss */"./resources/sass/sidebar.scss");
 
 
 /***/ })

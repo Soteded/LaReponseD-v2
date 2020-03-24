@@ -31,6 +31,10 @@ Route::get('/test', function (){
     return view('test');
 });
 
+Route::get('/user/invalidUsername/{id}', 'UserController@invalidUsername')->name('invalidUsername');
+Route::get('/user/edit/{id}', 'UserController@edit')->name('editUser');
+
 Route::resource('quiz', 'QuizController');
+Route::resource('user', 'UserController');
 Route::resource('question', 'QuestionController');
 Route::resource('choix', 'ChoixController');

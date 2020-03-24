@@ -16,7 +16,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/sidebar.js') }}" defer></script>
-    <script src="{{ asset('js/darkmode.js') }}" defer></script>
+    <script src="{{ asset('js/custom.js') }}" defer></script>
     <script src="https://kit.fontawesome.com/e8767330e3.js" crossorigin="anonymous"></script>
 
 
@@ -28,7 +28,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/sidebar.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('css/darkmode.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet" type="text/css">
     <style>
         html, body {
             background-color: #fff;
@@ -130,6 +130,10 @@
         <?php
             $id = Auth::user()->id;
             $profile = Profile::where('userId', $id)->first();
+
+            if (preg_match("/^(.*?(\bpute|\bsalope|\binvalide)[^$]*)$/i", Auth::user()->name) || empty(Auth::user()->name)){
+                echo "<script>window.alert('Votre nom d\'utilisateur est invalide'); window.location.href='/user/edit/$id'; </script>";
+            }
         ?>
         <div class="page-wrapper chiller-theme">
             <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
@@ -284,7 +288,7 @@
             <main class="container py-4">
                 @yield('content')
             </main>
-            <!-- page-content" -->
+            <!-- page-content -->
         </div>
         <!-- page-wrapper -->
         @else

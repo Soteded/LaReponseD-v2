@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\Category;
+use App\Quiz;
+use App\Profile;
 
 class HomeController extends Controller
 {
@@ -33,6 +37,11 @@ class HomeController extends Controller
      */
     public function dashboard()
     {
-        return view('dashboard');
+        $users = User::all();
+        $categories = Category::all();
+        $profiles = Profile::all();
+        $quizs = Quiz::all();
+
+        return view('dashboard', ['users' => $users, 'categories' => $categories, 'profiles' => $profiles]);
     }
 }
