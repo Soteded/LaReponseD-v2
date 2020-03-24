@@ -14,21 +14,21 @@ class RoleController extends Controller
         //dd($request->all());
         //return view('profileBlade.show', ['profile' => $profile])->with('success','Bravo, vous avez changé le role de timothéLeModo !');
 
-        $truc = $request->aled;
+        $actual = $request->aled;
         
-        //dd($truc);
+        //dd($actual);
 
         $profile = Profile::where('id', $request->profileId)->first();
         $user = User::where('id',$request->profileId)->first();
 
-        if ($truc == 'moderator') {
+        if ($actual == 'moderator') {
             $newRole = Role::where('name', 'Modo')->first();
             $user->roles()->detach();
 
             $user->assignRole($newRole);
 
             return redirect()->route('show', ['id' => $profile->id])->with('success',"$profile->firstName $profile->lastName est devenu un modérateur");
-        } elseif ($truc == 'user') {
+        } elseif ($actual == 'user') {
             $newRole = Role::where('name', 'User')->first();
             $user->roles()->detach();
 
@@ -36,7 +36,7 @@ class RoleController extends Controller
 
             return redirect()->route('show', ['id' => $profile->id])->with('success',"$profile->firstName $profile->lastName est devenu un utilisateur");
         } else {
-            print($truc.'rien');
+            print($actual.'rien');
         }
         
     }

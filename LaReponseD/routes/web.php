@@ -27,4 +27,8 @@ Route::get('/profile/create', 'ProfileController@create');
 Route::get('/quiz/createQuiz', 'QuizController@create')->name('createQuiz');
 Route::get('/quiz/show', 'QuizController@show')->name('show');
 
+Route::get('/user/invalidUsername/{id}', 'UserController@invalidUsername')->name('invalidUsername');
+Route::get('/user/edit/{id}', 'UserController@edit')->name('editUser');
+
 Route::resource('quiz', 'QuizController');
+Route::resource('user', 'UserController');
