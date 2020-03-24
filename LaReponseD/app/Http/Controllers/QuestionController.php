@@ -44,9 +44,10 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
+
         $current_id = Auth::user()->id;
         $quiz = Quiz::where('CreatorId', $current_id)->latest('created_at')->first();
-    
+
         if (isset($request->question) && isset($request->repJuste) && isset($request->rep2) && isset($request->rep3) && isset($request->rep4)) {
             $newQuestion = new Question;
 
@@ -60,10 +61,11 @@ class QuestionController extends Controller
                         'rep3' => $request->request->get('rep3'),
                         'rep4' => $request->request->get('rep4'));
 
+            //return view('test', ['quiz' => $quiz], ['question' => $newQuestion],['choix' => $listChoix] );
             return redirect()->action('ChoixController@store', ['listChoix' => $listChoix]);
         } else {
             $messages = "Vous n'avez pas remplis tous les champs";
-            return view('quizBlade.question.create', ['quiz' => $quiz])->with('error','Vous n\'avez pas rentré tous les champs requis')->withErrors($messages);
+            return view('quizBlade.questionBlade.create', ['quiz' => $quiz])->with('error','Vous n\'avez pas rentré tous les champs requis')->withErrors($messages);
         }
     }
 

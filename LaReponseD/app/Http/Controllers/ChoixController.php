@@ -64,12 +64,12 @@ class ChoixController extends Controller
             }
         }
         $newchoix->RQuestionId = $question->questionId;
-
-        if ($_POST['action'] == 'again') {
-            return view('quizBlade.questionBlade.create', ['quiz' => $quiz]);
-        } else if ($_POST['action'] == 'end') {
-            return redirect('home')->with('success','Bravo, vous avez cr?? votre quiz !');
-        }
+        $newchoix->save();
+        //if ($_POST['action'] == 'again') {
+          //  return view('quizBlade.questionBlade.create', ['quiz' => $quiz]);
+        //} else if ($_POST['action'] == 'end') {
+          //  return redirect('home')->with('success','Bravo, vous avez cr?? votre quiz !');
+        //}
     }
 
     /**

@@ -56,7 +56,7 @@
                         </div>
                         <!--##############################-->
 
-                        <button type="submit" class="btn btn-primary" name="action" value="next">Réponses</button>
+                        <button type="submit" class="btn btn-primary">Réponses</button>
                     </form>
                 </div>
             </div>
