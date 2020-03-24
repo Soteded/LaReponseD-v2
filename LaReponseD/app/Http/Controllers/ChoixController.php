@@ -37,7 +37,7 @@ class ChoixController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store($aled)
     {
         $current_id = Auth::user()->id;
         $quiz = Quiz::where('CreatorId', $current_id)->latest('created_at')->first();
@@ -65,11 +65,11 @@ class ChoixController extends Controller
         }
         $newchoix->RQuestionId = $question->questionId;
         $newchoix->save();
-        //if ($_POST['action'] == 'again') {
-          //  return view('quizBlade.questionBlade.create', ['quiz' => $quiz]);
-        //} else if ($_POST['action'] == 'end') {
-          //  return redirect('home')->with('success','Bravo, vous avez cr?? votre quiz !');
-        //}
+        if ($bouton == 'again') {
+            return view('quizBlade.questionBlade.create', ['quiz' => $quiz]);
+        } else if ($_POST['action'] == 'end') {
+            return redirect('home')->with('success','Bravo, vous avez cr?? votre quiz !');
+        }
     }
 
     /**
