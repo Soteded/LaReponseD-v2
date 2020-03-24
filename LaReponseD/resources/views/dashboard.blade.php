@@ -53,9 +53,9 @@
                             
                             <?php
                             if ($user->id%2 == 1) {
-                                echo "<tr id='infos$user->id' colspan='4' valign='middle' style='background-color:#eee; height:70px; display: none;'>";
+                                echo "<tr id='infos$user->id' colspan='4' style='background-color:#eee; height:70px; display: none;'>";
                             } else {
-                                echo "<tr id='infos$user->id' colspan='4' style='background-color:#fff; display: none;'>";
+                                echo "<tr id='infos$user->id' colspan='4' style='background-color:#fff; height:70px; display: none;'>";
                             }?>
                                 <td>Rôle actuel : <h6 style="margin:5px;">
                                 <?php
@@ -104,7 +104,16 @@
         <div class="card" style='margin:1%;width:34%;'>
             <div class="card-header">
                 <h2 class="float-left">Categories</h2>
-                <a id="addCateg" class="btn btn-secondary float-right" href='#'><i class="fas fa-plus"></i></a>
+                <form action="{{ route('category.create') }}">
+                    {{ method_field('GET') }}
+                    {{ csrf_field() }}
+                    <button type="submit" id="addCateg" class="btn btn-secondary float-right"><i class="fas fa-plus"></i></button>
+                </form>
+                <form action="{{ route('category.index') }}" method="GET">
+                    {{ method_field('GET') }}
+                    {{ csrf_field() }}
+                    <button type="submit" class="btn btn-secondary float-right" style="margin-right:10px;"><i class="fas fa-eye"></i></button>
+                </form>
             </div>
             <div id="categDb" class="card-body">
                 <table class="table table-striped" style="display:table;">
@@ -112,7 +121,8 @@
                         <tr>
                             <td style="width:20%;">ID</td>
                             <td style="width:45%;">Name</td>
-                            <td style="width:35%;"></td>
+                            <td style="width:15%;"></td>
+                            <td style="width:17%;"></td>
                         </tr>
                     </thead>
                     <tbody>
@@ -120,9 +130,19 @@
                             <tr>
                                 <td style="width:20%; text-align:center;">{{ $category->categoryId }}</td>
                                 <td style="width:45%;">{{ $category->categoryName }}</td>
-                                <td style="width:35%;">
-                                    <a class="btn"><i class="fas fa-edit"></i></a>
-                                    <a class="btn"><i class="fas fa-trash"></i></a>
+                                <td style="width:15%;">
+                                    <form action="{{ route('category.edit', $category->categoryId) }}" method="PATCH">
+                                        {{ method_field('PATCH') }}
+                                        {{ csrf_field() }}
+                                        <button type="submit" class="btn btn-warning"><i class="fas fa-edit"></i></button>
+                                    </form>
+                                </td>
+                                <td style="width:17%;">
+                                    <form action="{{ route('category.destroy', $category->categoryId) }}" method="POST">
+                                        {{ method_field('DELETE') }}
+                                        {{ csrf_field() }}
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr(e) ?')"><i class='fas fa-trash'></i></button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

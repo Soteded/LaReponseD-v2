@@ -38,3 +38,4 @@ Route::resource('quiz', 'QuizController');
 Route::resource('user', 'UserController');
 Route::resource('question', 'QuestionController');
 Route::resource('choix', 'ChoixController');
+Route::resource('category', 'CategoryController');
