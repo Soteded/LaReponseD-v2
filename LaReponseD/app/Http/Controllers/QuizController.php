@@ -28,7 +28,7 @@ class QuizController extends Controller
 
     public function create()
     {
-        $categorys = Category::all();
+        $categorys = Category::where("categoryId", '>', 1)->get();
         return view('quizBlade.create', ['categorys' => $categorys]);
     }
 

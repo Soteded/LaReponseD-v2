@@ -9,6 +9,8 @@ class Choix extends Model
     protected $table = 'choix';
     protected $primaryKey = 'choixId';
 
+    public $timestamps = false;
+
     public function question() {
         return $this->hasOne('App\Question');
     }

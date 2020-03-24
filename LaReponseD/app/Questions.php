@@ -9,6 +9,8 @@ class Questions extends Model
     protected $table = 'questions';
     protected $primaryKey = 'questionsId';
 
+    public $timestamps = false;
+
     public function quiz()
     {
         return $this->hasOne('App\Quiz');

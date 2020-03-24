@@ -13,10 +13,12 @@ class CategoryTableSeeder extends Seeder
     public function run()
     {
         $allCategory = array(
+            'Non référencée',
             'Jeux vidéo',
             'Film',
             'Livre',
             'Série',
+            'Autre',
             'Ceci',
             'Est',
             'Un',
