@@ -1,39 +1,68 @@
 @extends('layouts.app')
 
+{{dd($quiz)}}
 @section('content')
-    <style>
-        .uper {
-            margin-top: 40px;
-        }
-    </style>
-    <div class="uper">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
         @if(session()->get('success'))
             <div class="alert alert-success">
                 {{ session()->get('success') }}
             </div><br />
         @endif
-        
+        </div>
+        <div class="card col-md-11">
+            @if(! $quiz)
+                <div class="alert alert-success">
+                    <p>Ce quiz n'existe pas</p>
+                </div>
+            @else
+                <div class="card-header">
+                    <h2 class="float-left">{{$quiz->titre}}</h2>
+                    {{dd($quiz)}}
+                </div>
 
-        <h2>{{$quiz->titre}}</h2>
-        <p>{{$quiz->id}}</p>
+                <?php
+                    $quest = 0;
+                ?>
 
-        @foreach($quiz.questions as $question)
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <td>ID</td>
-                    <td>First Name</td>
-                    <td>Last Name</td>
-                    <td>Question</td>
-                </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{{$question->id}}</td>
-                        <td>{{$question->question}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        @endforeach
-        <div>
+                <div class="card-body">
+                    <form method="post" >
+                        @csrf
+                        @foreach($quiz->questions as $question)
+                            <?php
+                                shuffle($question->choix);
+                            ?>
+                            <h5>{{$question->question}}</h5>
+                            <input type="hidden" name="reponses[]" value='{{$question->choix->choix0}}'>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <td>R�ponse 1</td>
+                                        <td>R�ponse 2</td>
+                                        <td>R�ponse 3</td>
+                                        <td>R�ponse 4</td>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr>
+                                        @foreach($question->choix as $choix)
+                                            <td>
+                                                <input type="radio" value="{{$choix}}" name='{{$quest}}'>
+                                                <label for='{{$quest}}'>{{$choix}}</label>
+                                            </td>
+                                        @endforeach
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <?php $quest += 1;?>
+                        @endforeach
+                        <button type="submit" class="btn btn-primary" name="action">Valider</button>
+                    </form>
+                </div>
+            @endif
+        </div>
+    </div>
+</div>
 @endsection

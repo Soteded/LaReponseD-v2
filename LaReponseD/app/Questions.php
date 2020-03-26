@@ -1,13 +1,14 @@
 <?php
 
 namespace App;
-
+use App\Quiz;
+use App\Questions;
 use Illuminate\Database\Eloquent\Model;
 
 class Questions extends Model
 {
     protected $table = 'questions';
-    protected $primaryKey = 'questionsId';
+    protected $primaryKey = 'questionId';
 
     public $timestamps = false;
 
@@ -18,11 +19,11 @@ class Questions extends Model
     
     public function choix()
     {
-        return $this->hasOne(Choix::class, 'questionId', 'id');
+        return $this->hasMany('App\Choix', 'RQuestionId', 'questionId');
     }
 
     protected $fillable = [
-        'question', 'quizId'
+        'question',
     ];
 
     protected $hidden = [

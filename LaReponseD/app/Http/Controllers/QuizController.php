@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Question;
+use App\Questions;
 use App\Quiz;
+use App\Choix;
 use App\Category;
 use View;
 use Illuminate\Http\Request;
@@ -23,7 +24,8 @@ class QuizController extends Controller
      */
     public function index()
     {
-        //
+        $quizs = Quiz::all()->sortByDesc('created_at');
+        return view('quizBlade.index', ['quizs' => $quizs]);
     }
 
     public function create()
@@ -56,9 +58,9 @@ class QuizController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($id)
     {
-        $quiz = Quiz::with('questions.choix');
+        $quiz = Quiz::with('questions.choix')->find($id);
         return view('quizBlade.show', ['quiz' => $quiz]);
     }
 
@@ -95,4 +97,23 @@ class QuizController extends Controller
     {
         //
     }
+
+    public function verify(Request $request) {
+        $points_max = sizeof($request->reponses);
+        $points = 0;
+
+        for ($i=0; $i < sizeof($request->reponses); $i++) {
+            if ($request[$i] == $request->reponses[$i]) {
+                $points += 1;
+            }
+        }
+
+        $quiz = Quiz::find($request->quiz_id);
+        $quiz->joues += 1;
+        $quiz->save();
+
+        return view('quizBlade.results', ['points' => $points, 'points_max' => $points_max]);
+    }
 }
+
+
