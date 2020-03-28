@@ -17,14 +17,15 @@ class Quiz extends Model
     }
 
     public function questions() {
-        return $this->hasMany(Question::class, 'quizId', 'id');
+        return $this->hasMany('App\Questions', 'RQuizId', 'quizId');
     }
 
     protected $fillable = [
         'titre',
         'category', 
         'creatorId', 
-        'noteAvg'
+        'noteAvg',
+        'compteur',
     ];
 
     /**

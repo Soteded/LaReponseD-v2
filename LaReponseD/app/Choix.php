@@ -1,7 +1,7 @@
 <?php
 
 namespace App;
-
+use App\Questions;
 use Illuminate\Database\Eloquent\Model;
 
 class Choix extends Model
@@ -12,11 +12,11 @@ class Choix extends Model
     public $timestamps = false;
 
     public function question() {
-        return $this->hasOne('App\Question');
+        return $this->hasOne('App\Questions');
     }
     
     protected $fillable = [
-        'questionId', 'choixJuste', 'choix2', 'choix3', 'choix4'
+        'choixJuste', 'choix2', 'choix3', 'choix4'
     ];
 
     /**

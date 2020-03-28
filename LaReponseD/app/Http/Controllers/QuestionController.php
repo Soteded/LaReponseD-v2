@@ -44,12 +44,10 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-
         $current_id = Auth::user()->id;
         $quiz = Quiz::where('CreatorId', $current_id)->latest('created_at')->first();
 
         if (isset($request->question) && isset($request->repJuste) && isset($request->rep2) && isset($request->rep3) && isset($request->rep4)) {
-            //$newQuestion = ['question' => $request->question, 'RQuizId' => $quiz->quizId];
 
             $newQuestion = new Questions;
             $newQuestion->question = $request->question;
