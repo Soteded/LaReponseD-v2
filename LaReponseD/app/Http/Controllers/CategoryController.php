@@ -17,8 +17,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        $quizs = Quiz::all();
-        return view('categoryBlade.index', ['categories' => $categories, 'quizs' => $quizs]);
+        return view('categoryBlade.index', ['categories' => $categories]);
     }
 
     /**

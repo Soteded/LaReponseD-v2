@@ -34,6 +34,9 @@ Route::get('/test', function (){
 Route::get('/user/invalidUsername/{id}', 'UserController@invalidUsername')->name('invalidUsername');
 Route::get('/user/edit/{id}', 'UserController@edit')->name('editUser');
 
+Route::get('/user/role/{id}', 'RoleController@viewRole')->name('editRole')->middleware('auth','role:Admin');
+Route::get('/user/role/{id}/{roleId}', 'RoleController@updateRole')->name('updateRole')->middleware('auth','role:Admin');
+
 Route::resource('quiz', 'QuizController');
 Route::resource('user', 'UserController');
 Route::resource('question', 'QuestionController');

@@ -17,7 +17,12 @@
     <div id="racine" class="mainFlex">
         <div class="card" style='margin:1%;width:62%;'>
             <div class="card-header">
-                <h2 class="center">Users</h2>
+                <h2 class="float-left">Users</h2>
+                <form action="{{ route('user.index') }}" method="GET">
+                    {{ method_field('GET') }}
+                    {{ csrf_field() }}
+                    <button type="submit" class="btn btn-secondary float-right" style="margin-right:10px;"><i class="fas fa-eye"></i></button>
+                </form>
             </div>
             <div id="usersDb" class="card-body">
                 <table class="table table-striped" style="display:table;">
@@ -30,9 +35,10 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php $color = true;?>
                         @foreach( $users as $user )
                             <?php
-                            if ($user->id%2 == 1) {
+                            if ($color) {
                                 echo "<tr style='background-color:#eee;'>";
                             } else {
                                 echo "<tr style='background-color:#fff;'>";
@@ -52,17 +58,19 @@
                             </tr>
                             
                             <?php
-                            if ($user->id%2 == 1) {
+                            if ($color) {
                                 echo "<tr id='infos$user->id' colspan='4' style='background-color:#eee; height:70px; display: none;'>";
+                                $color = !$color;
                             } else {
                                 echo "<tr id='infos$user->id' colspan='4' style='background-color:#fff; height:70px; display: none;'>";
+                                $color = !$color;
                             }?>
                                 <td>Rôle actuel : <h6 style="margin:5px;">
                                 <?php
                                 try {
                                     echo $user->roles->first()['name'];
                                 } catch (\Throwable $th) {
-                                    echo "No roles ?";
+                                    echo "Pas de Rôle";
                                 }
                                 
                                 ?>
@@ -81,7 +89,7 @@
                                     ?>
 
                                 </td>
-                                <td valign="middle">
+                                <td>
                                     <form action="{{ route('invalidUsername', $user->id) }}" method="PATCH">
                                         {{ method_field('PATCH') }}
                                         {{ csrf_field() }}

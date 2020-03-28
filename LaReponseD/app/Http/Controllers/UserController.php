@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\User;
 
 class UserController extends Controller
 {
@@ -14,7 +15,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+        return view('userBlade.index', ['users' => $users]);
     }
 
     /**
@@ -125,11 +127,11 @@ class UserController extends Controller
             /*-------------DELETE USER-------------*/
             User::where('id', $id)->delete();
 
-            return redirect()->route('dashboard')->with('success','Utilisateur supprimé avec succès!');
+            return redirect()->back()->with('success','Utilisateur supprimé avec succès!');
 
         } catch (\Throwable $th) {
 
-            return redirect()->route('dashboard')->with('alert','Une erreur est survenue');
+            return redirect()->back()->with('alert','Une erreur est survenue');
         }
     }
 }
