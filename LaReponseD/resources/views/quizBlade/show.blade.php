@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-{{dd($quiz)}}
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -19,13 +18,12 @@
             @else
                 <div class="card-header">
                     <h2 class="float-left">{{$quiz->titre}}</h2>
-                    {{dd($quiz)}}
                 </div>
 
                 <?php
                     $quest = 0;
                 ?>
-
+                {{dd($quiz->questions->choix)}}
                 <div class="card-body">
                     <form method="post" >
                         @csrf

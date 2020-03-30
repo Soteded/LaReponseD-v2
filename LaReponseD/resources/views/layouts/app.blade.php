@@ -230,13 +230,13 @@
                             <span>Quizz</span>
                         </li>
                         <li class="">
-                            <a href="#">
+                            <a href="/quiz">
                             <i class="fas fa-question-circle"></i>
                             <span>Tous les quizz</span>
                             </a>
                         </li>
                         <li class="">
-                            <a href="#">
+                            <a href="/quiz/categories">
                             <i class="fas fa-question-circle"></i>
                             <span>Categories</span>
                             </a>
