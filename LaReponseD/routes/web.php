@@ -21,7 +21,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard')->middleware('auth','role:Admin');
 
-Route::resource('profile', 'ProfileController');
 Route::get('/profile/create', 'ProfileController@create');
 
 Route::get('/quiz', 'QuizController@index')->name('quiz');
@@ -38,6 +37,7 @@ Route::get('/user/edit/{id}', 'UserController@edit')->name('editUser');
 Route::get('/user/role/{id}', 'RoleController@viewRole')->name('editRole')->middleware('auth','role:Admin');
 Route::get('/user/role/{id}/{roleId}', 'RoleController@updateRole')->name('updateRole')->middleware('auth','role:Admin');
 
+Route::resource('profile', 'ProfileController');
 Route::resource('quiz', 'QuizController');
 Route::resource('user', 'UserController');
 Route::resource('question', 'QuestionController');
