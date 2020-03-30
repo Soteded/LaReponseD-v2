@@ -42,14 +42,16 @@ class QuizController extends Controller
         ]);
 
         $newQuiz = new Quiz;
-
+        $userId = Auth::user()->id;
         $newQuiz->titre = $request->titre;
         $newQuiz->RCategoryId = $request->theme;
-        $newQuiz->CreatorId = Auth::user()->id;
+        $newQuiz->CreatorId = $userId;
 
         $newQuiz->save();
+
+        $newQuiz = Quiz::with('category')->where('CreatorId', $userId)->latest('created_at')->first();
         
-        return view('quizBlade.questionBlade.create', ['quiz' => $newQuiz]);
+        return view('quizBlade.questionBlade.create', ['quiz' => $newQuiz], ['questions' => null ]);
     }
 
     /**
@@ -99,7 +101,6 @@ class QuizController extends Controller
     }
 
     public function verify(Request $request) {
-        //$pointsMax = sizeof($request);
         $points = 0;
         $quiz = Quiz::with('questions.choix')->find($request->quizId);
         $questions = $quiz->questions;
