@@ -99,16 +99,17 @@ class QuizController extends Controller
     }
 
     public function verify(Request $request) {
-        $pointsMax = sizeof($request->reponses);
+        //$pointsMax = sizeof($request);
         $points = 0;
-
+        $quiz = Quiz::with('questions.choix')->find($request->quizId);
+        $questions = $quiz->questions;
+        $pointsMax = sizeof($questions);
         for ($i=0; $i < $pointsMax; $i++) {
-            if ($request[$i] == $request->reponses[$i]) {
+            if ($questions[$i]->choix->choixJuste == $request[$i]) {
                 $points += 1;
             }
         }
 
-        $quiz = Quiz::find($request->quizId);
         $quiz->compteur += 1;
         $quiz->save();
 

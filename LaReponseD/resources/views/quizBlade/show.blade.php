@@ -23,7 +23,7 @@
                 <?php $quest = 0 ?>
 
                 <div class="card-body">
-                    <form method="post" action="{{ route('verify', ['reponses' => 'choix', 'quizId' => $quiz->quizId]) }}">>
+                    <form method="post" action="{{ route('verify', ['quizId' => $quiz->quizId]) }}">
                         @csrf
                         @foreach($quiz->questions as $question)
                             <?php
@@ -31,29 +31,30 @@
                                 $liste_choix = [$choix->choixJuste, $choix->choix2, $choix->choix3, $choix->choix4];
                                 shuffle($liste_choix);
                             ?>
-                            <h5>{{$question->question}}</h5>
-                            <input type="hidden" name="reponses[]" value='{{$question->choix->choixJuste}}'>
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <td>R�ponse 1</td>
-                                        <td>R�ponse 2</td>
-                                        <td>R�ponse 3</td>
-                                        <td>R�ponse 4</td>
-                                    </tr>
-                                </thead>
+                            <div class="border mb-2 p-2">
+                                <h5>{{$question->question}}</h5>
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <td>R�ponse 1</td>
+                                            <td>R�ponse 2</td>
+                                            <td>R�ponse 3</td>
+                                            <td>R�ponse 4</td>
+                                        </tr>
+                                    </thead>
 
-                                <tbody class="h-auto">
-                                    <tr class="text-center">
-                                        @foreach($liste_choix as $choix)
-                                            <td>
-                                                <input type="radio" value="{{$choix}}" name='{{$quest}}'>
-                                                <label for='{{$quest}}'>{{$choix}}</label>
-                                            </td>
-                                        @endforeach
-                                    </tr>
-                                </tbody>
-                            </table>
+                                    <tbody class="h-auto">
+                                        <tr class="text-center">
+                                            @foreach($liste_choix as $choix)
+                                                <td>
+                                                    <input type="radio" value="{{$choix}}" name='{{$quest}}'>
+                                                    <label for='{{$quest}}'>{{$choix}}</label>
+                                                </td>
+                                            @endforeach
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                             <?php $quest += 1;?>
                         @endforeach
                         <button type="submit" class="btn btn-primary" name="action">Valider</button>
