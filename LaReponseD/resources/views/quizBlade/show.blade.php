@@ -20,19 +20,19 @@
                     <h2 class="float-left">{{$quiz->titre}}</h2>
                 </div>
 
-                <?php
-                    $quest = 0;
-                ?>
-                {{dd($quiz->questions->choix)}}
+                <?php $quest = 0 ?>
+
                 <div class="card-body">
-                    <form method="post" >
+                    <form method="post" action="{{ route('verify', ['reponses' => 'choix', 'quizId' => $quiz->quizId]) }}">>
                         @csrf
                         @foreach($quiz->questions as $question)
                             <?php
-                                shuffle($question->choix);
+                                $choix = $question->choix;
+                                $liste_choix = [$choix->choixJuste, $choix->choix2, $choix->choix3, $choix->choix4];
+                                shuffle($liste_choix);
                             ?>
                             <h5>{{$question->question}}</h5>
-                            <input type="hidden" name="reponses[]" value='{{$question->choix->choix0}}'>
+                            <input type="hidden" name="reponses[]" value='{{$question->choix->choixJuste}}'>
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
@@ -43,9 +43,9 @@
                                     </tr>
                                 </thead>
 
-                                <tbody>
-                                    <tr>
-                                        @foreach($question->choix as $choix)
+                                <tbody class="h-auto">
+                                    <tr class="text-center">
+                                        @foreach($liste_choix as $choix)
                                             <td>
                                                 <input type="radio" value="{{$choix}}" name='{{$quest}}'>
                                                 <label for='{{$quest}}'>{{$choix}}</label>

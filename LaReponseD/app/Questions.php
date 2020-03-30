@@ -19,7 +19,7 @@ class Questions extends Model
     
     public function choix()
     {
-        return $this->hasMany('App\Choix', 'RQuestionId', 'questionId');
+        return $this->hasOne('App\Choix', 'RQuestionId', 'questionId');
     }
 
     protected $fillable = [

@@ -36,17 +36,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <?php
-                                $quizs = DB::table('quiz')->where('CreatorId','LIKE',Auth::user()->id)->get();
-                                $quizs = json_decode(json_encode($quizs), true);
-                                foreach ($quizs as $quiz) {?>
-                                    <td class="text-center">{{ $quiz["titre"] }}</td>
-                                    <td class="text-center">{{ $quiz["compteur"] }}</td>
-                                <?php
-                            }
-                        ?>
-                        </tr>
+                        <?php $quizs = DB::table('quiz')->where('CreatorId','LIKE',Auth::user()->id)->get();?>
+                        @foreach($quizs as $quiz)
+                            <tr>
+                                    <td class="text-center">{{ $quiz->titre }}</td>
+                                    <td class="text-center">{{ $quiz->compteur }}</td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
