@@ -89,7 +89,9 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-        //
+        $profile = Profile::where('profileId', $id)->get();
+
+        return view('profileBlade.show', [ "profile" => $profile ]);
     }
 
     /**

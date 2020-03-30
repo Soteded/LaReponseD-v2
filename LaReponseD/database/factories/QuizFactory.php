@@ -7,7 +7,6 @@ use Faker\Generator as Faker;
 
 $factory->define(Profile::class, function (Faker $faker) {
     return [
-        'pseudo' => $faker->name,
-        'birthDate' => $faker->dateTimeThisCentury->format('Y-m-d'),
+        //
     ];
 });

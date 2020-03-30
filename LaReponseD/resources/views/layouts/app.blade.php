@@ -204,12 +204,12 @@
                                 @endhasrole
                                 </li>
                                 <li>
-                                <a class="dropdown-item" href="{{ url('profiles/'.Auth::id()) }}"
+                                <a class="dropdown-item" href="#"
                                     onclick="event.preventDefault();
                                     document.getElementById('show-form').submit();">
                                     {{ __('Profile') }}
                                 </a>
-                                <form id="show-form" action="{{ url('profiles/'.Auth::id()) }}" method="GET" style="display: none;">
+                                <form id="show-form" action="{{ route('profile.show', Auth::id() ) }}" method="GET" style="display: none;">
                                     @csrf
                                 </form>
                                 </li>
@@ -243,19 +243,17 @@
                         </li>
                         <?php
                             $categories = DB::table('quiz')->select('RCategoryId')->distinct()->get();
-                            $array = json_decode(json_encode($categories), true);
-                            foreach ($array as $oui) {?>
+                            foreach ($categories as $oui) {?>
                                 <li class="">
-                                    <a href="{{ url('/quiz/categorie/'.$oui['RCategoryId']) }}">
+                                    <a href="{{ url('/quiz/categorie/'.$oui->RCategoryId) }}">
                                     <i class="fas fa-question-circle"></i>
                                     <span class="badge badge-pill badge-success notification">
                                         <?php
-                                            $count = DB::table('quiz')->select(DB::raw('count(*) as count'))->groupBy('RCategoryId')->where('RCategoryId','LIKE',$oui['RCategoryId'])->get();
-                                            $count = json_decode(json_encode($count), true);
-                                            echo $count[0]["count"];
+                                            $count = DB::table('quiz')->select(DB::raw('count(*) as count'))->groupBy('RCategoryId')->where('RCategoryId','LIKE',$oui->RCategoryId)->get();
+                                            echo $count[0]->count;
                                         ?> 
                                     </span>
-                                    <span>{{ $oui["RCategoryId"] }}</span>
+                                    <span>{{ $oui->RCategoryId }}</span>
                                     </a>
                                 </li>
                             <?php

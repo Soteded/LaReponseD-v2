@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\UserNoteQuiz;
+
 class UserNoteQuizController extends Controller
 {
     /**
@@ -23,7 +25,7 @@ class UserNoteQuizController extends Controller
      */
     public function create()
     {
-        //
+        return view("usernoteBlade.create");
     }
 
     /**
@@ -45,7 +47,8 @@ class UserNoteQuizController extends Controller
      */
     public function show($id)
     {
-        //
+        $usernote = UserNoteQuiz::where('userNoteQuizId', $id)->get();
+        return view("usernoteBlade.show", ['usernote' => $usernote]);
     }
 
     /**
@@ -79,6 +82,14 @@ class UserNoteQuizController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            UserNoteQuiz::where('userNoteQuizId', $id)->delete();
+
+            return redirect()->back()->with('success','Commentaire supprimé avec succès!');
+
+        } catch (\Throwable $th) {
+
+            return redirect()->back()->with('alert','Une erreur est survenue');
+        }
     }
 }
