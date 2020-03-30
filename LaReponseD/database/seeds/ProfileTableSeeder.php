@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
+use App\Profile;
 
 class ProfileTableSeeder extends Seeder
 {
@@ -13,7 +14,7 @@ class ProfileTableSeeder extends Seeder
     public function run()
     {
         User::all()->each(function ($user){
-            $user->profile()->save(factory(App\Profile::class)->create());
+            $user->profile()->save(factory(Profile::class)->create());
         });
     }
 }
