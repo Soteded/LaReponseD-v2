@@ -4,5 +4,6 @@
     "/css/custom.css": "/css/custom.css",
     "/css/sidebar.css": "/css/sidebar.css",
     "/js/custom.js": "/js/custom.js",
+    "/js/edit.js": "/js/edit.js",
     "/js/sidebar.js": "/js/sidebar.js"
 }

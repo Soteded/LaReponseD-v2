@@ -46,17 +46,16 @@ class QuestionController extends Controller
     {
         $current_id = Auth::user()->id;
         $quiz = Quiz::where('CreatorId', $current_id)->latest('created_at')->first();
-        $questions = Questions::with('choix')->where('RQuizId', $quiz->quizId)->get();
+
         if (isset($request->question) && isset($request->repJuste) && isset($request->rep2) && isset($request->rep3) && isset($request->rep4)) {
 
             $newQuestion = new Questions;
             $newQuestion->question = $request->question;
             $newQuestion->RQuizId = $quiz->quizId;
-            
             $newQuestion->save();
-            $questionId = DB::getPdo()->lastInsertId();
+            
             $newChoix = new Choix;
-            $newChoix->RQuestionId = $questionId;
+            $newChoix->RQuestionId = $newQuestion->questionId;
             $newChoix->choixJuste = $request->repJuste;
             $newChoix->choix2 = $request->rep2;
             $newChoix->choix3 = $request->rep3;
@@ -70,7 +69,9 @@ class QuestionController extends Controller
             } else if ($_POST['action'] == 'end') {
                 return redirect('home')->with('success','Bravo, vous avez cr?? votre quiz !');
             }
+
         } else {
+            $questions = Questions::with('choix')->where('RQuizId', $quiz->quizId)->get();
             $messages = "Vous n'avez pas remplis tous les champs";
             return view('quizBlade.questionBlade.create', ['quiz' => $quiz], ['questions' => $questions])->withErrors($messages);
         }

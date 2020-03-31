@@ -66,15 +66,11 @@ class QuizController extends Controller
         return view('quizBlade.show', ['quiz' => $quiz]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $quiz = Quiz::with('questions.choix')->with('category')->find($id);
+        $categorys = Category::where("categoryId", '>', 1)->get();
+        return view('quizBlade.edit', ['quiz' => $quiz], ['categorys' => $categorys]);
     }
 
     /**
@@ -86,7 +82,29 @@ class QuizController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if (isset($request->theme)) {
+            $quiz = Quiz::find($id);
+            $quiz->RCategoryId = $request->theme;
+            $quiz->save();
+            $messages = "theme update";
+        }else if (isset($request->questions) && isset($request->questions['question']) && isset($request->questions['choixJuste']) && isset($request->questions['choix2']) && isset($request->questions['choix3']) && isset($request->questions['choix4'])) {
+            $question = Questions::find($request->questions['questionId']);
+            $question->question = $request->questions['question'];
+            $question->save();
+            $question->choix->choixJuste = $request->questions['choixJuste'];
+            $question->choix->choix2 = $request->questions['choix2'];
+            $question->choix->choix3 = $request->questions['choix3'];
+            $question->choix->choix4 = $request->questions['choix4'];
+            $question->choix->save();
+
+            $messages = "Question et Choix update";
+        }else {
+            $messages = "Vous n'avez pas remplis tous les champs";
+            return redirect('/quiz/edit/'.$id)->withErrors($messages);
+        }
+
+        return redirect('/quiz/edit/'.$id)->with($messages);
+
     }
 
     /**
