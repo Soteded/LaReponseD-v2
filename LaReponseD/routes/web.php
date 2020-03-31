@@ -24,12 +24,6 @@ Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard')->middlew
 Route::get('/profile/create', 'ProfileController@create');
 
 Route::get('/quiz', 'QuizController@index')->name('quiz');
-Route::get('/quiz/createQuiz', 'QuizController@create')->name('createQuiz');
-Route::get('/quiz/createQuestion', 'QuestionController@create')->name('createQuestion');
-Route::get('/quiz/show/{id}', 'QuizController@show')->name('show');
-Route::get('/test', function (){
-    return view('test');
-});
 
 Route::get('/user/invalidUsername/{id}', 'UserController@invalidUsername')->name('invalidUsername');
 Route::get('/user/edit/{id}', 'UserController@edit')->name('editUser');
@@ -43,3 +37,12 @@ Route::resource('user', 'UserController');
 Route::resource('question', 'QuestionController');
 Route::resource('choix', 'ChoixController');
 Route::resource('category', 'CategoryController');
+
+
+
+Route::group(['middleware' => ['auth']], function () { 
+    Route::get('/quiz/createQuiz', 'QuizController@create')->name('createQuiz');
+    Route::get('/quiz/createQuestion', 'QuestionController@create')->name('createQuestion');
+    Route::get('/quiz/show/{id}', 'QuizController@show')->name('show');
+    Route::post('quiz/results', 'QuizController@verify')->name('verify');
+});

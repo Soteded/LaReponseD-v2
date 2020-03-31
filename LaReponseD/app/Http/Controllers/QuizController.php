@@ -42,14 +42,16 @@ class QuizController extends Controller
         ]);
 
         $newQuiz = new Quiz;
-
+        $userId = Auth::user()->id;
         $newQuiz->titre = $request->titre;
         $newQuiz->RCategoryId = $request->theme;
-        $newQuiz->CreatorId = Auth::user()->id;
+        $newQuiz->CreatorId = $userId;
 
         $newQuiz->save();
+
+        $newQuiz = Quiz::with('category')->where('CreatorId', $userId)->latest('created_at')->first();
         
-        return view('quizBlade.questionBlade.create', ['quiz' => $newQuiz]);
+        return view('quizBlade.questionBlade.create', ['quiz' => $newQuiz], ['questions' => null ]);
     }
 
     /**
@@ -99,20 +101,20 @@ class QuizController extends Controller
     }
 
     public function verify(Request $request) {
-        $points_max = sizeof($request->reponses);
         $points = 0;
-
-        for ($i=0; $i < sizeof($request->reponses); $i++) {
-            if ($request[$i] == $request->reponses[$i]) {
+        $quiz = Quiz::with('questions.choix')->find($request->quizId);
+        $questions = $quiz->questions;
+        $pointsMax = sizeof($questions);
+        for ($i=0; $i < $pointsMax; $i++) {
+            if ($questions[$i]->choix->choixJuste == $request[$i]) {
                 $points += 1;
             }
         }
 
-        $quiz = Quiz::find($request->quiz_id);
-        $quiz->joues += 1;
+        $quiz->compteur += 1;
         $quiz->save();
 
-        return view('quizBlade.results', ['points' => $points, 'points_max' => $points_max]);
+        return view('quizBlade.results', ['points' => $points, 'pointsMax' => $pointsMax]);
     }
 }
 

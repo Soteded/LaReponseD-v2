@@ -13,7 +13,7 @@ class Quiz extends Model
         return $this->hasOne('App\User', 'id', 'CreatorId');
     }
     public function category() {
-        return $this->hasOne('App\Category','categoryId','RCategoryId');
+        return $this->hasOne('App\Category', 'categoryId', 'RCategoryId');
     }
 
     public function questions() {

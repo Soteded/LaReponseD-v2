@@ -15,10 +15,22 @@
             @endif
             <!-- Affichage à gauche -->
             <div class="col no-gutters">
-                <div style="background:grey; width:100%; height:100%;">
+                <div style="background:grey; width:100%; height:100%;" class="text-white">
                     <div> 
-                        
+                        <h5>{{$quiz->titre}}</h5>
+                        <p> {{$quiz->category->categoryName}}</p>
                     </div>
+                    @if ($questions != null)
+                        @foreach($questions as $question)
+                            <div> 
+                                {{$question->titre}}
+                                {{$question->choix->choixJuste}}
+                                {{$question->choix->choix2}}
+                                {{$question->choix->choix3}}
+                                {{$question->choix->choix4}}
+                            </div>
+                        @endforeach
+                    @endif
                 </div>
             </div>
 

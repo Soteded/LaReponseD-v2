@@ -263,7 +263,7 @@
                             <span>Créer son quizz</span>
                         </li>
                         <li class="">
-                            <a href="#">
+                            <a href="/quiz/createQuiz">
                             <i class="fas fa-plus"></i>
                             <span>Ici</span>
                             </a>
