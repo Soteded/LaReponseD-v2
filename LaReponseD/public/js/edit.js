@@ -81,47 +81,58 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/sidebar.js":
-/*!*********************************!*\
-  !*** ./resources/js/sidebar.js ***!
-  \*********************************/
+/***/ "./resources/js/edit.js":
+/*!******************************!*\
+  !*** ./resources/js/edit.js ***!
+  \******************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-$(".sidebar-dropdown > a").click(function () {
-  $(".sidebar-submenu").slideUp(200);
+var utils = {
+  showPage: function showPage(pageId) {
+    var pages = document.getElementsByClassName("page");
 
-  if ($(this).parent().hasClass("active")) {
-    $(".sidebar-dropdown").removeClass("active");
-    $(this).parent().removeClass("active");
-  } else {
-    $(".sidebar-dropdown").removeClass("active");
-    $(this).next(".sidebar-submenu").slideDown(200);
-    $(this).parent().addClass("active");
+    for (var i = 0; i < pages.length; i++) {
+      var page = pages[i];
+      if (page.id == pageId) page.style.display = "";else page.style.display = "none";
+    }
   }
-});
-$("#close-sidebar").click(function () {
-  $(".page-wrapper").removeClass("toggled");
-});
-$("#show-sidebar").click(function () {
-  $(".page-wrapper").addClass("toggled");
-});
+};
+
+var selectPage = function selectPage() {
+  var hash = document.location.hash.replace("#", "");
+  var path = hash.split("/");
+
+  switch (path[0]) {
+    case "question":
+      utils.showPage(hash);
+      break;
+
+    default:
+    case "category":
+      utils.showPage("category");
+      break;
+  }
+};
+
+window.addEventListener("load", selectPage);
+window.addEventListener("hashchange", selectPage);
 
 /***/ }),
 
-/***/ 3:
-/*!***************************************!*\
-  !*** multi ./resources/js/sidebar.js ***!
-  \***************************************/
+/***/ 2:
+/*!************************************!*\
+  !*** multi ./resources/js/edit.js ***!
+  \************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! Y:\B2\LaReponseD-v2\LaReponseD\resources\js\sidebar.js */"./resources/js/sidebar.js");
+module.exports = __webpack_require__(/*! Y:\B2\LaReponseD-v2\LaReponseD\resources\js\edit.js */"./resources/js/edit.js");
 
 
 /***/ })

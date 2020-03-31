@@ -23,7 +23,7 @@
                     @if ($questions != null)
                         @foreach($questions as $question)
                             <div> 
-                                {{$question->titre}}
+                                {{$question->question}}
                                 {{$question->choix->choixJuste}}
                                 {{$question->choix->choix2}}
                                 {{$question->choix->choix3}}

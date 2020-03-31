@@ -41,6 +41,7 @@
                             <tr>
                                     <td class="text-center">{{ $quiz->titre }}</td>
                                     <td class="text-center">{{ $quiz->compteur }}</td>
+                                    <td><button type="button" class="btn btn-primary float-right" onclick="window.location='{{ url("quiz/edit/$quiz->quizId") }}'">Edit</button> </td>
                             </tr>
                         @endforeach
                     </tbody>

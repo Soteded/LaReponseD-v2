@@ -45,5 +45,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/quiz/createQuiz', 'QuizController@create')->name('createQuiz');
     Route::get('/quiz/createQuestion', 'QuestionController@create')->name('createQuestion');
     Route::get('/quiz/show/{id}', 'QuizController@show')->name('show');
-    Route::post('quiz/results', 'QuizController@verify')->name('verify');
+    Route::post('/quiz/results', 'QuizController@verify')->name('verify');
+    Route::get('/quiz/edit/{id}', 'QuizController@edit')->name('edit');
 });
