@@ -9,6 +9,10 @@ class Category extends Model
     protected $table = 'category';
     protected $primaryKey = 'categoryId';
 
+    public function quizs() {
+        return $this->hasMany('App\Quiz');
+    }
+
     /**
      * The attributes that are mass assignable.
      *

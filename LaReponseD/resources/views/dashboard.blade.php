@@ -15,7 +15,7 @@
     @endif
     </div>
     <div id="racine" class="mainFlex">
-        <div class="card" style='margin:1%;width:62%;'>
+        <div class="card" style='margin:1%;width:100%;'>
             <div class="card-header">
                 <h2 class="float-left">Users</h2>
                 <form action="{{ route('user.index') }}" method="GET">
@@ -29,9 +29,11 @@
                     <thead>
                         <tr>
                             <td style="width:5%;"></td>
-                            <td style="width:10%;">ID</td>
-                            <td style="width:30%;">Name</td>
-                            <td style="width:45%;">Email</td>
+                            <td style="width:5%;">ID</td>
+                            <td style="width:20%;">Nom de compte</td>
+                            <td style="width:20%;">Pseudonyme</td>
+                            <td style="width:25%;">Email</td>
+                            <td style="width:25%;">Créé le :</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -43,9 +45,9 @@
                             } else {
                                 echo "<tr style='background-color:#fff;'>";
                             }?>
-                                <td style="width:5%;"><a id='<?php echo $user->id; ?>' class="btn userDetail" href="#"><i class="fas fa-plus"></i></a></td>
-                                <td style="width:10%; text-align:center;">{{ $user->id }}</td>
-                                <td style="width:30%;">
+                                <td style="width:5%;"><a id='<?php echo $user->id; ?>' class="btn userDetail"><i class="fas fa-plus"></i></a></td>
+                                <td style="width:5%; text-align:center;">{{ $user->id }}</td>
+                                <td style="width:20%;">
                                     <?php
                                     if ( $user->name == "") { 
                                         echo "<p style='font-style: italic;'>Invalidated</p>";
@@ -54,7 +56,9 @@
                                     }
                                     ?>
                                 </td>
-                                <td style="width:45%;">{{ $user->email }}</td>
+                                <td style="width:20px;">{{ $user->profile->pseudo }}</td>
+                                <td style="width:25%;">{{ $user->email }}</td>
+                                <td style="width:25%;">{{ $user->created_at }}</td>
                             </tr>
                             
                             <?php
@@ -109,7 +113,7 @@
                 </table>
             </div>
         </div>
-        <div class="card" style='margin:1%;width:34%;'>
+        <div class="card" style='margin:1%;width:36%;'>
             <div class="card-header">
                 <h2 class="float-left">Categories</h2>
                 <form action="{{ route('category.create') }}">
@@ -158,33 +162,77 @@
                 </table>
             </div>
         </div>
-        <div class="card" style="margin:1%; width: 70%;">
+        <div class="card" style="margin:1%; width: 60%;">
             <div class="card-header">
-                <h2 class="float-left">Profiles</h2>
+                <h2 class="float-left">Quizs</h2>
+                <form action="{{ route('quiz.index') }}" method="GET">
+                    {{ method_field('GET') }}
+                    {{ csrf_field() }}
+                    <button type="submit" class="btn btn-secondary float-right" style="margin-right:10px;"><i class="fas fa-eye"></i></button>
+                </form>
             </div>
             <div class="card-body">
                 <table class="table table-striped" style="display:table;">
                     <thead>
                         <tr>
-                            <td style="width:10%;">ID</td>
-                            <td style="width:30%;">Pseudo</td>
-                            <td style="width:30%;">Date de Naissance</td>
-                            <td style="width:30%;">Créé le :</td>
+                            <td style="width:5%;"></td>
+                            <td style="width:15%;">ID</td>
+                            <td style="width:15;">Createur</td>
+                            <td style="width:25%;">Titre</td>
+                            <td style="width:25%;">Catégorie</td>
+                            <td style="width:15%;">Questions</td>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach( $profiles as $profile )
-                            <tr>
-                                <td style="width:10%;">{{ $profile->profileId }}</td>
-                                <td style="width:30%;">{{ $profile->pseudo }}</td>
-                                <td style="width:30%;">{{ $profile->birthDate }}</td>
-                                <td style="width:30%;">{{ $profile->created_at }}</td>
+                        <?php $color = true;?>
+                        @foreach( $quizs as $quiz )
+                            <?php
+                            if ($color) {
+                                echo "<tr style='background-color:#eee;'>";
+                            } else {
+                                echo "<tr style='background-color:#fff;'>";
+                            }?>
+                                <td style="width:5%;"><a id='a<?php echo $quiz->quizId; ?>' class="btn quizDetail"><i class="fas fa-plus"></i></a></td>
+                                <td style="width:15%; text-align:center;">{{ $quiz->quizId }}</td>
+                                <td style="width:15;">{{ $quiz->user->profile->pseudo }}</td>
+                                <td style="width:25%;">{{ $quiz->titre }}</td>
+                                <td style="width:25%;">{{ $quiz->category->categoryName }}</td>
+                                <td style="width:15%;">{{ count($quiz->questions) }}</td>
+                            </tr>
+
+                            <?php
+                            if ($color) {
+                                echo "<tr id='infosQa$quiz->quizId' colspan='4' style='background-color:#eee; height:70px; display: none;'>";
+                                $color = !$color;
+                            } else {
+                                echo "<tr id='infosQa$quiz->quizId' colspan='4' style='background-color:#fff; height:70px; display: none;'>";
+                                $color = !$color;
+                            }?>
+
+                                <td>
+                                    Questions : 
+                                    @foreach ($quiz->questions as $question)
+                                        "{{ $question->question }}"
+                                    @endforeach
+                                </td>
+
+                                <br>
+
+                                <td>
+                                    Commentaires :
+                                    @foreach ($quiz->comments as $comment)
+                                        "Users : {{ $comment->user->profile->pseudo }}"
+                                        "Titre : {{ $comment->titre }}"
+                                        "Corps : {{ $comment->corps }}"
+                                    @endforeach
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
+
     </div>
 </div>
 @endsection
