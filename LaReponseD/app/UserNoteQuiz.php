@@ -10,7 +10,7 @@ class UserNoteQuiz extends Model
     protected $primaryKey = 'usernotequizId';
 
     public function user() {
-        return $this->hasOne('App\User');
+        return $this->hasOne('App\User', 'id', 'userPostId');
     }
 
     public function quiz() {

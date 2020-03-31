@@ -116,6 +116,25 @@ $('document').ready(function () {
       prev = this.id;
     }
   });
+  var prev2 = '';
+  $('.quizDetail').click(function () {
+    var divs2 = document.getElementsByClassName('quizDetail');
+    var info2Id = 'infosQ';
+    [].slice.call(divs2).forEach(function (div) {
+      div.innerHTML = '<i class="fas fa-plus"></i>';
+      document.getElementById(info2Id.concat(div.id)).style.display = "none";
+    });
+
+    if (prev2 == this.id) {
+      document.getElementById(info2Id.concat(this.id)).style.display = "none";
+      document.getElementById(this.id).innerHTML = '<i class="fas fa-plus"></i>';
+      prev2 = '';
+    } else {
+      document.getElementById(info2Id.concat(this.id)).style.display = "flex";
+      document.getElementById(this.id).innerHTML = '<i class="fas fa-minus"></i>';
+      prev2 = this.id;
+    }
+  });
 });
 
 /***/ }),

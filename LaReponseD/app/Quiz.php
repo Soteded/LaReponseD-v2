@@ -10,14 +10,18 @@ class Quiz extends Model
     protected $primaryKey = 'quizId';
 
     public function user() {
-        return $this->hasOne('App\User');
+        return $this->hasOne('App\User', 'id', 'CreatorId');
     }
     public function category() {
-        return $this->hasOne('App\Category');
+        return $this->hasOne('App\Category','categoryId','RCategoryId');
     }
 
     public function questions() {
         return $this->hasMany('App\Questions', 'RQuizId', 'quizId');
+    }
+
+    public function comments() {
+        return $this->hasMany('App\UserNoteQuiz', 'RQuizId', 'quizId');
     }
 
     protected $fillable = [

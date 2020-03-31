@@ -39,9 +39,8 @@ class HomeController extends Controller
     {
         $users = User::all();
         $categories = Category::all();
-        $profiles = Profile::all();
         $quizs = Quiz::all();
 
-        return view('dashboard', ['users' => $users, 'categories' => $categories, 'profiles' => $profiles]);
+        return view('dashboard', ['users' => $users, 'categories' => $categories, 'quizs' => $quizs]);
     }
 }
