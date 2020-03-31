@@ -116,7 +116,7 @@ class UserController extends Controller
         try {
 
             /*--------DELETE USER'S PROFILE--------*/
-            DB::table('profile')->select(DB::raw('*'))->where('userId','LIKE',$id)->delete();
+            DB::table('profile')->where('userId','LIKE',$id)->delete();
 
             /*---------DELETE USER'S QUIZS---------*/
             DB::table('quiz')->where('CreatorId','LIKE',$id)->update(['CreatorId' => 1]);

@@ -7,6 +7,7 @@ use App\Quiz;
 use App\Choix;
 use App\Category;
 use View;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use http\Exception\InvalidArgumentException;
@@ -97,7 +98,33 @@ class QuizController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+
+            /*----------DELETE COMMENTS-----------*/
+            DB::table('usernotequiz')->where('RQuizId','LIKE',$id)->delete();
+
+            /*----------DELETE CHOICES-----------*/
+
+            $questions = DB::table('questions')->where('RQuizId','LIKE',$id)->get();
+
+            foreach ($questions as $question) {
+                DB::table('choix')->where('RQuestionId','LIKE',$question->questionId)->delete();
+            }
+
+            /*----------DELETE QUESTIONS-----------*/
+            DB::table('questions')->where('RQuizId','LIKE',$id)->delete();
+
+            /*-------------DELETE QUIZ-------------*/
+            Quiz::where('quizId', $id)->delete();
+
+            return redirect()->back()->with('success','Quiz supprimé avec succès!');
+
+        } catch (\Throwable $th) {
+
+            dd($th);
+
+            return redirect()->back()->with('alert','Une erreur est survenue');
+        }
     }
 
     public function verify(Request $request) {

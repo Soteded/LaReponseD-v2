@@ -202,28 +202,39 @@
 
                             <?php
                             if ($color) {
-                                echo "<tr id='infosQa$quiz->quizId' colspan='4' style='background-color:#eee; height:70px; display: none;'>";
+                                echo "<tr id='infosQa$quiz->quizId' colspan='4' style='background-color:#eee; height:auto; display: none;'>";
                                 $color = !$color;
                             } else {
-                                echo "<tr id='infosQa$quiz->quizId' colspan='4' style='background-color:#fff; height:70px; display: none;'>";
+                                echo "<tr id='infosQa$quiz->quizId' colspan='4' style='background-color:#fff; height:auto; display: none;'>";
                                 $color = !$color;
                             }?>
+                                <td>
+                                    <form action="{{ route('quiz.destroy', $quiz->quizId ) }}" method="POST">
+                                        {{ method_field('DELETE') }}
+                                        {{ csrf_field() }}
+                                        <button type="submit" class="btn btn-danger" style="font-size: 10px; margin-right: 2px;" onclick="return confirm('Êtes-vous sûr(e) ?')"><i class='fas fa-trash'></i></button>
+                                    </form>
+                                </td>
 
                                 <td>
-                                    Questions : 
+                                    Questions :<br/>
                                     @foreach ($quiz->questions as $question)
-                                        "{{ $question->question }}"
+                                        "{{ $question->question }}"<br/>
                                     @endforeach
                                 </td>
 
-                                <br>
-
                                 <td>
-                                    Commentaires :
+                                    Commentaires : <br/>
                                     @foreach ($quiz->comments as $comment)
-                                        "Users : {{ $comment->user->profile->pseudo }}"
-                                        "Titre : {{ $comment->titre }}"
-                                        "Corps : {{ $comment->corps }}"
+                                        <div style="display: flex; padding: 2px;">
+                                            <form action="{{ route('userNote.destroy', $comment->userNoteQuizId ) }}" method="POST">
+                                                {{ method_field('DELETE') }}
+                                                {{ csrf_field() }}
+                                                <button type="submit" class="btn btn-danger" style="font-size: 10px; margin-right: 2px;" onclick="return confirm('Êtes-vous sûr(e) ?')"><i class='fas fa-trash'></i></button>
+                                            </form>
+                                            {{ $comment->user->profile->pseudo }} : <b>{{ $comment->titre }}</b> "{{ $comment->corps }}"
+                                            <br/>
+                                        </div>
                                     @endforeach
                                 </td>
                             </tr>
