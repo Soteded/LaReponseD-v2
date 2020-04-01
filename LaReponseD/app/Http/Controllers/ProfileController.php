@@ -61,13 +61,23 @@ class ProfileController extends Controller
     public function store(Request $request)
     {
         $current_date_time = Carbon::now()->toDateTimeString();
-
-        $validatedProfile = $request->validate([
-            'pseudo' => 'required',
-            'birthDate' => 'required',
-        ]);
-
         $newProfile = new Profile;
+
+        if ($request->image == null) {
+            $validatedProfile = $request->validate([
+                'pseudo' => 'required',
+                'birthDate' => 'required',
+            ]);
+        }else{
+            $validatedProfile = $request->validate([
+                'pseudo' => 'required',
+                'birthDate' => 'required',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            $imageName = time().'.'.$request->image->extension();  
+            $request->image->move(public_path('images/avatar'), $imageName);
+            $newProfile->avatar = $imageName;
+        }
 
         $newProfile->pseudo = $request->pseudo;
         $newProfile->birthDate = $request->birthDate;
@@ -75,7 +85,7 @@ class ProfileController extends Controller
 
         $newProfile->created_at = $current_date_time;
         $newProfile->updated_at = $current_date_time;
-
+        
         $newProfile->save();
 
         return redirect('/home')->with('success', 'Profil créé avec succès !');

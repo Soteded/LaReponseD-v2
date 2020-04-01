@@ -149,7 +149,7 @@
                 </div>
                 <div class="sidebar-header">
                     <div class="user-pic">
-                    <img class="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
+                    <img class="img-responsive img-rounded" src="images/avatar/{{ $profile->avatar }}"
                         alt="User picture">
                     </div>
                     <div class="user-info">
