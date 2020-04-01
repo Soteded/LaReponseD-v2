@@ -190,47 +190,47 @@
                             <span>Profile</span>
                             </a>
                             <div class="sidebar-submenu">
-                            <ul>
-                                <li>
-                                @hasrole('Admin')
-                                <a class="dropdown-item fas fa-user" href="#"
-                                    onclick="event.preventDefault();
-                                        document.getElementById('index-form').submit();">
-                                    {{ __('All Profiles') }}
-                                </a>
-                                <form id="index-form" action="#" method="GET" style="display: none;">
-                                    @csrf
-                                </form>
-                                @endhasrole
-                                </li>
-                                <li>
-                                <a class="dropdown-item" href="#"
-                                    onclick="event.preventDefault();
-                                    document.getElementById('show-form').submit();">
-                                    {{ __('Profile') }}
-                                </a>
-                                <form id="show-form" action="{{ route('profile.show', Auth::id() ) }}" method="GET" style="display: none;">
-                                    @csrf
-                                </form>
-                                </li>
-                                <li>
-                                <a class="dropdown-item" href="#"
-                                    onclick="event.preventDefault();
-                                        document.getElementById('edit-form').submit();">
-                                    {{ __('Edit Profile') }}
-                                </a>
-                                <form id="edit-form" action="#" method="EDIT" style="display: none;">
-                                    @csrf
-                                </form>
-                                </li>
-                            </ul>
+                                <ul>
+                                    <li>
+                                        @hasrole('Admin')
+                                        <a class="dropdown-item fas fa-user" href="{{ route('profile.index') }}"
+                                            onclick="event.preventDefault();
+                                            document.getElementById('index-form').submit();">
+                                            {{ __('All Profiles') }}
+                                        </a>
+                                        <form id="index-form" action="{{ route('profile.index') }}" method="GET" style="display: none;">
+                                            @csrf
+                                        </form>
+                                        @endhasrole
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('profile.show', Auth::id() ) }}"
+                                            onclick="event.preventDefault();
+                                            document.getElementById('show-form').submit();">
+                                            {{ __('Profile') }}
+                                        </a>
+                                        <form id="show-form" action="{{ route('profile.show', Auth::id() ) }}" method="GET" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#"
+                                            onclick="event.preventDefault();
+                                                document.getElementById('edit-form').submit();">
+                                            {{ __('Edit Profile') }}
+                                        </a>
+                                        <form id="edit-form" action="{{ route('profile.edit', Auth::id() ) }}" method="EDIT" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </li>
+                                </ul>
                             </div>
                         </li>
                         <li class="header-menu">
                             <span>Quizz</span>
                         </li>
                         <li class="">
-                            <a href="/quiz">
+                            <a href="{{ route('quiz.index') }}">
                             <i class="fas fa-question-circle"></i>
                             <span>Tous les quizz</span>
                             </a>

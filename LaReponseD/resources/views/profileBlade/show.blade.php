@@ -18,12 +18,10 @@
     @endif
         <div class="card">
             <div class="card-header">
-                <h2 class="float-left">Main Menu</h2>
-                <button type="button" class="btn btn-primary float-right" onclick="window.location='{{ url('quiz/create') }}'">Créer un quiz</button>
+                <h2 class="float-left">Profile de : {{ $profile->pseudo }}</h2>
             </div>
-
             <div class="card-body">
-                <p>Hey, re ! :)</p>
+                {{ $profile }}
             </div>
         </div>
     </div>
