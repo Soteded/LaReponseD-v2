@@ -17,7 +17,7 @@
                 <br />
             @endif
 
-            <form method="post" action="{{ route('profile.store') }}" autocomplete="off">
+            <form method="post" action="{{ route('profile.store') }}" autocomplete="off" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
 
@@ -29,6 +29,12 @@
                     <label for="birthDate">Date de naissance :</label>
                     <input type="date" class="form-control" name="birthDate" required/>
                 </div>
+
+                <div class="form-group">
+                    <label for="image">Avatar</label>
+                    <input type="file" accept="image/*" name="image" class="form-control"/>
+                </div>
+
                 <button type="submit" class="btn btn-primary">Créer !</button>
             </form>
         </div>
