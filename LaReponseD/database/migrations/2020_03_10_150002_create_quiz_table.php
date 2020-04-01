@@ -26,7 +26,7 @@ class CreateQuizTable extends Migration
             $table->string('titre');
             $table->integer('noteAvg')->nullable();
             $table->integer('compteur')->nullable();
-
+            $table->string('image')->default('default.jpg');
             $table->timestamps();
         });
     }

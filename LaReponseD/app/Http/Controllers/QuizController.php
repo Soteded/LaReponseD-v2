@@ -37,13 +37,25 @@ class QuizController extends Controller
 
     public function store(Request $request)
     {
-        $validatedQuiz = $request->validate([
-            'titre' => 'required',
-            'theme' => 'required',
-        ]);
-
         $newQuiz = new Quiz;
         $userId = Auth::user()->id;
+
+        if ($request->image == null) {
+            $validatedQuiz = $request->validate([
+                'titre' => 'required',
+                'theme' => 'required',
+            ]);
+        } else {
+            $validatedQuiz = $request->validate([
+                'titre' => 'required',
+                'theme' => 'required',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            $imageName = time().'.'.$request->image->extension();  
+            $request->image->move(public_path('images/miniature'), $imageName);
+            $newQuiz->image = $imageName;
+        }
+        
         $newQuiz->titre = $request->titre;
         $newQuiz->RCategoryId = $request->theme;
         $newQuiz->CreatorId = $userId;
