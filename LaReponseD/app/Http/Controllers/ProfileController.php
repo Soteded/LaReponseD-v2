@@ -17,7 +17,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        //
+        dd("Salut, c'est l'index des profiles");
     }
 
     /**
@@ -90,8 +90,7 @@ class ProfileController extends Controller
     public function show($id)
     {
         $profile = Profile::where('profileId', $id)->get();
-
-        return view('profileBlade.show', [ "profile" => $profile ]);
+        return view('profileBlade.show', [ "profile" => $profile[0] ]);
     }
 
     /**
@@ -102,7 +101,8 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-        //
+        $profile = Profile::where('profileId', $id)->get();
+        return view('profileBlade.edit', [ "profile" => $profile[0] ]);
     }
 
     /**
@@ -114,7 +114,7 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
     /**
