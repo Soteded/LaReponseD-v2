@@ -3,62 +3,56 @@
 
 @section('content')
 
-        <div class="row no-gutters">
-
-            <!-- Affichage à gauche -->
-            <div class="col no-gutters">
-                <div style="background:grey; width:100%; height:100%;">
-                    <div> 
-                        
-                    </div>
-                </div>
+        <link href="{{ asset('css/createQuiz.css') }}" rel="stylesheet" type="text/css">
+        <div class="card card-6">
+            <div class="card-heading">
+                <h2 class="title">Créer ton quiz</h2>
             </div>
-
-
-
-            <!-- Formulaire à droite -->
-            <div class="col no-gutters">
-                <div class="card-body" style="background:red; width:100%; height:100%;">
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div><br />
-                    @endif
-        
-                    <form method="post" action="{{ route('quiz.store') }}" autocomplete="off" enctype="multipart/form-data">
-                        @csrf
-                        <!-- TITRE DU QUIZs -->
-                        <div class="form-group">
-                            <label for="titre">Titre :</label>
-                            <input type="text" class="form-control" id="titre" name="titre" required/>
-                        </div>
-        
-                        <!-- THEME DU QUIZs -->
-                        <label for="theme">Thème :</label>
-                        <select name="theme" id="theme" required>
-                            <option value="">--Please choose an option--</option>
-                            @foreach ($categorys as $category)
-                                <option value="{{$category->categoryId}}">{{$category->categoryName}}</option>
+            <div class="card-body">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
                             @endforeach
-                        </select>
-
-                        <!-- IMAGE DU QUIZs -->
-                        <div class="form-group" >
-                            <label for="image">Miniature</label>
-                            <input type="file" accept="image/*" name="image" class="form-control"/>
+                        </ul>
+                    </div>
+                @endif
+                <form method="POST" action="{{ route('quiz.store') }}" autocomplete="off" enctype="multipart/form-data">
+                    <div class="form-row">
+                        <div class="name">Titre</div>
+                        <div class="value">
+                            <input class="form-control input--style-6" type="text" id="titre" name="titre" required/>
                         </div>
-
-                        <button type="submit" class="btn btn-primary">Créer</button>
-                    </form>
-        
-                </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="name">Theme</div>
+                        <div class="value">
+                            <div class="input-group">
+                                <select name="theme" id="theme" required>
+                                    <option value="">--Please choose an option--</option>
+                                    @foreach ($categorys as $category)
+                                        <option value="{{$category->categoryId}}">{{$category->categoryName}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="name">Upload CV</div>
+                        <div class="value">
+                            <div class="input-group js-input-file">
+                                <input type="file" accept="image/*" name="image" class="form-control"/>
+                                <label class="label--file" for="file">Choose file</label>
+                                <span class="input-file__info">No file chosen</span>
+                            </div>
+                            <div class="label--desc">upload une image. MAX jesaisplusMB</div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Créer</button>
             </div>
         </div>
-    
-
- 
 @endsection

@@ -26,6 +26,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
     <!-- Styles -->
+    <link href="{{ asset('css/createQuiz.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/sidebar.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet" type="text/css">
@@ -149,7 +150,7 @@
                 </div>
                 <div class="sidebar-header">
                     <div class="user-pic">
-                    <img class="img-responsive img-rounded" src="images/avatar/{{ $profile->avatar }}"
+                    <img class="img-responsive img-rounded" src="/images/avatar/{{ $profile->avatar }}"
                         alt="User picture">
                     </div>
                     <div class="user-info">
@@ -235,35 +236,28 @@
                             <span>Tous les quizz</span>
                             </a>
                         </li>
-                        <li class="">
-                            <a href="/quiz/categories">
-                            <i class="fas fa-question-circle"></i>
-                            <span>Categories</span>
-                            </a>
-                        </li>
-                        <?php
-                            $categories = DB::table('quiz')->select('RCategoryId')->distinct()->get();
-                            foreach ($categories as $oui) {?>
+                        <!-- Affichage des categories si il y a un quiz existant-->
+                        <?php $categories = DB::table('quiz')->select('RCategoryId')->distinct()->get() ?>
+                            @foreach($categories as $categorie)
                                 <li class="">
-                                    <a href="{{ url('/quiz/categorie/'.$oui->RCategoryId) }}">
+                                    <a href="{{ url('/quiz/categorie/'.$categorie->RCategoryId) }}">
                                     <i class="fas fa-question-circle"></i>
                                     <span class="badge badge-pill badge-success notification">
                                         <?php
-                                            $count = DB::table('quiz')->select(DB::raw('count(*) as count'))->groupBy('RCategoryId')->where('RCategoryId','LIKE',$oui->RCategoryId)->get();
+                                            $count = DB::table('quiz')->select(DB::raw('count(*) as count'))->groupBy('RCategoryId')->where('RCategoryId','LIKE',$categorie->RCategoryId)->get();
                                             echo $count[0]->count;
                                         ?> 
                                     </span>
-                                    <span>{{ $oui->RCategoryId }}</span>
+                                    <span> {{DB::table('category')->where('categoryId', $categorie->RCategoryId)->first()->categoryName}}</span>
                                     </a>
                                 </li>
-                            <?php
-                            }
-                        ?>
+                            @endforeach
+
                         <li class="header-menu">
                             <span>Créer son quizz</span>
                         </li>
                         <li class="">
-                            <a href="/quiz/createQuiz">
+                            <a href="/quiz/create">
                             <i class="fas fa-plus"></i>
                             <span>Ici</span>
                             </a>

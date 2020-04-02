@@ -16,14 +16,13 @@
 
         <div class="container">
             <div class="container">
-                <div class="row">
+                <div class="row justify-content-center">
                         @if(session()->get('success'))
                             <div class="alert alert-success">
                                 {{ session()->get('success') }}
                             </div><br />
                         @endif
-
-
+                        
                         @foreach($quizs as $quiz)
                         <div class="col-lg-4 col-md-6 mb-4">
                             <div class="card h-100"> 

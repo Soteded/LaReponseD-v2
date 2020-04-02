@@ -24,6 +24,7 @@ Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard')->middlew
 Route::get('/profile/create', 'ProfileController@create');
 
 Route::get('/quiz', 'QuizController@index')->name('quiz');
+Route::get('/quiz/categorie/{categoryId}', 'QuizController@indexCategory')->name('categorie');
 
 Route::get('/user/invalidUsername/{id}', 'UserController@invalidUsername')->name('invalidUsername');
 Route::get('/user/edit/{id}', 'UserController@edit')->name('editUser');

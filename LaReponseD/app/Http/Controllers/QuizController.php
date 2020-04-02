@@ -173,6 +173,12 @@ class QuizController extends Controller
 
         return view('quizBlade.results', ['points' => $points, 'pointsMax' => $pointsMax]);
     }
+
+    public function indexCategory($categoryId){
+        $categoryName = Category::select('categoryName')->where('categoryId', $categoryId);
+        $quizs = Quiz::where('RCategoryId', $categoryId)->get();
+        return view('quizBlade.category', ['quizs' =>$quizs], ['categoryName' => $categoryName]);
+    }
 }
 
 
