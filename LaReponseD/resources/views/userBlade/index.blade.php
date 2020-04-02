@@ -29,8 +29,9 @@
                     <tr>
                         <td style="width:5%;"></td>
                         <td style="width:10%;">ID</td>
-                        <td style="width:30%;">Name</td>
-                        <td style="width:45%;">Email</td>
+                        <td style="width:25%;">Name</td>
+                        <td style="width:20%;">Pseudo</td>
+                        <td style="width:30%;">Email</td>
                     </tr>
                 </thead>
                 <tbody style="height: 50vh;">
@@ -44,7 +45,7 @@
                         }?>
                             <td style="width:5%;"><a id='<?php echo $user->id; ?>' class="btn userDetail" href="#"><i class="fas fa-plus"></i></a></td>
                             <td style="width:10%; text-align:center;">{{ $user->id }}</td>
-                            <td style="width:30%;">
+                            <td style="width:25%;">
                                 <?php
                                 if ( $user->name == "") { 
                                     echo "<p style='font-style: italic;'>Invalidated</p>";
@@ -53,7 +54,16 @@
                                 }
                                 ?>
                             </td>
-                            <td style="width:45%;">{{ $user->email }}</td>
+                            <td style="width:20%;">
+                                <?php
+                                if ( $user->profile->pseudo == "") { 
+                                    echo "<p style='font-style: italic;'>Invalidated</p>";
+                                } else {
+                                    echo $user->profile->pseudo;
+                                }
+                                ?>
+                            </td>
+                            <td style="width:30%;">{{ $user->email }}</td>
                         </tr>
                         
                         <?php
@@ -68,7 +78,7 @@
                         $userProfile = json_decode(json_encode($userProfile), true);
                         ?>
                             <td>
-                                <img src="/uploads/avatars/<?php echo $userProfile[0]['avatar'];?>" style="width:50px; height:50px; top:10px; left:10px;">
+                                <img class="img-responsive img-rounded" style="width:50px; height:50px; top:10px; left:10px;" src="/images/avatar/{{ $user->profile->avatar }}" alt="User picture">
                             </td>
                             <td>Rôle actuel : <h6 style="margin:5px;">
                                 <?php
@@ -99,7 +109,14 @@
                                 <form action="{{ route('invalidUsername', $user->id) }}" method="PATCH">
                                     {{ method_field('PATCH') }}
                                     {{ csrf_field() }}
-                                    <button type="submit" class="btn btn-warning btn-block" onclick="return confirm('Êtes-vous sûr(e) ?')"><i class="fas fa-edit"></i></button>
+                                    <button type="submit" class="btn btn-warning btn-block" onclick="return confirm('Êtes-vous sûr(e) ?')">Username Invalide</button>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="{{ route('invalidPseudo', $user->profile->profileId) }}" method="PATCH">
+                                    {{ method_field('PATCH') }}
+                                    {{ csrf_field() }}
+                                    <button type="submit" class="btn btn-warning btn-block" onclick="return confirm('Êtes-vous sûr(e) ?')">Pseudo Invalide</button>
                                 </form>
                             </td>
                             <td>

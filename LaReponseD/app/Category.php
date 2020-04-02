@@ -10,7 +10,7 @@ class Category extends Model
     protected $primaryKey = 'categoryId';
 
     public function quizs() {
-        return $this->hasMany('App\Quiz');
+        return $this->hasMany('App\Quiz', 'RCategoryId', 'categoryId');
     }
 
     /**

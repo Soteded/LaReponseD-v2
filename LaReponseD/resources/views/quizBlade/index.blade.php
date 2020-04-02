@@ -31,8 +31,8 @@
                                     <tr>
                                         <td>Titre</td>
                                         <td>Theme</td>
-                                        <td>Cr�ateur</td>
-                                        <td>Jou�</td>
+                                        <td>Créateur</td>
+                                        <td>Joué</td>
                                     </tr>
                                     </thead>
                             </div>

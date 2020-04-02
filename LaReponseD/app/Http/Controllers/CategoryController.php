@@ -20,6 +20,12 @@ class CategoryController extends Controller
         return view('categoryBlade.index', ['categories' => $categories]);
     }
 
+    public function indexu()
+    {
+        $categories = Category::all();
+        return view('categoryBlade.indexU', ['categories' => $categories]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -67,7 +73,8 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        $category = Category::where('categoryId', $id)->get();
+        return view('categoryBlade.show', ["category" => $category[0]]);
     }
 
     /**
