@@ -31,6 +31,7 @@ class Quiz extends Model
         'creatorId', 
         'noteAvg',
         'compteur',
+        'image',
     ];
 
     /**

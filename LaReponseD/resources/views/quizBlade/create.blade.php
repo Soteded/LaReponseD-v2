@@ -29,7 +29,7 @@
                         </div><br />
                     @endif
         
-                    <form method="post" action="{{ route('quiz.store') }}">
+                    <form method="post" action="{{ route('quiz.store') }}" autocomplete="off" enctype="multipart/form-data">
                         @csrf
                         <!-- TITRE DU QUIZs -->
                         <div class="form-group">
@@ -45,7 +45,13 @@
                                 <option value="{{$category->categoryId}}">{{$category->categoryName}}</option>
                             @endforeach
                         </select>
-        
+
+                        <!-- IMAGE DU QUIZs -->
+                        <div class="form-group" >
+                            <label for="image">Miniature</label>
+                            <input type="file" accept="image/*" name="image" class="form-control"/>
+                        </div>
+
                         <button type="submit" class="btn btn-primary">Créer</button>
                     </form>
         
