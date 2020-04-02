@@ -56,7 +56,15 @@
                                     }
                                     ?>
                                 </td>
-                                <td style="width:20px;">{{ $user->profile->pseudo }}</td>
+                                <td style="width:20px;">
+                                    <?php
+                                    if ( $user->profile->pseudo == "") { 
+                                        echo "<p style='font-style: italic;'>Invalidated</p>";
+                                    } else {
+                                        echo $user->profile->pseudo;
+                                    }
+                                    ?>
+                                </td>
                                 <td style="width:25%;">{{ $user->email }}</td>
                                 <td style="width:25%;">{{ $user->created_at }}</td>
                             </tr>

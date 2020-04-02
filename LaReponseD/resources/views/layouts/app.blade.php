@@ -1,5 +1,6 @@
 <?php
     use App\Profile;
+    use App\Category;
 ?>
 
 <!doctype html>
@@ -135,6 +136,10 @@
             if (preg_match("/^(.*?(\bpute|\bsalope|\binvalide)[^$]*)$/i", Auth::user()->name) || empty(Auth::user()->name)){
                 echo "<script>window.alert('Votre nom d\'utilisateur est invalide'); window.location.href='/user/edit/$id'; </script>";
             }
+
+            if (preg_match("/^(.*?(\bpute|\bsalope|\binvalide)[^$]*)$/i", Auth::user()->profile->pseudo) || empty(Auth::user()->profile->pseudo)){
+                echo "<script>window.alert('Votre pseudo est invalide'); window.location.href='/profile/editPseudo/$id'; </script>";
+            }
         ?>
         <div class="page-wrapper chiller-theme">
             <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
@@ -193,16 +198,14 @@
                             <div class="sidebar-submenu">
                                 <ul>
                                     <li>
-                                        @hasrole('Admin')
                                         <a class="dropdown-item fas fa-user" href="{{ route('profile.index') }}"
                                             onclick="event.preventDefault();
                                             document.getElementById('index-form').submit();">
-                                            {{ __('All Profiles') }}
+                                            {{ __('Tous les Profiles') }}
                                         </a>
                                         <form id="index-form" action="{{ route('profile.index') }}" method="GET" style="display: none;">
                                             @csrf
                                         </form>
-                                        @endhasrole
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="{{ route('profile.show', Auth::id() ) }}"

@@ -97,11 +97,11 @@ class UserController extends Controller
 
             DB::table('users')->where('id','LIKE',$id)->update(['name' => ""]);
 
-            return redirect()->route('dashboard')->with('success','Le nom d\'utilisateur à correctement été changé');
+            return redirect()->back()->with('success','Le nom d\'utilisateur à correctement été changé');
 
         } catch (\Throwable $th) {
 
-            return redirect()->route('dashboard')->with('alert','Une erreur est survenue');
+            return redirect()->back()->with('alert','Une erreur est survenue');
         }
     }
 

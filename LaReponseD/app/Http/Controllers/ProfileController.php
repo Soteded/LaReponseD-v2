@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Profile;
 use Carbon\Carbon;
 use Image;
@@ -17,7 +18,8 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        dd("Salut, c'est l'index des profiles");
+        $profiles = Profile::all();
+        return view('profileBlade.index', ["profiles" => $profiles]);
     }
 
     /**
@@ -37,19 +39,6 @@ class ProfileController extends Controller
         }
 
         return view('profileBlade.create');
-
-        die();
-
-        if (Profile::where('userId', '=', Auth::user()->id)) {
-            echo ('J\' ai déjà un profile');
-            die();
-            return view('profileBlade.create');
-            //return redirect('/home')->with('alert', 'Vous avez déjà un profile :(');
-        } else {
-            echo ('J\' ai pas un profile :(');
-            die();
-            return view('profileBlade.create');
-        }
     }
 
     /**
@@ -124,7 +113,78 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $current_date_time = Carbon::now()->toDateTimeString();
+
+        if ($request->image == null) {
+            $validatedProfile = $request->validate([
+                'pseudo' => 'required',
+                'birthDate' => 'required',
+            ]);
+        }else{
+            $validatedProfile = $request->validate([
+                'pseudo' => 'required',
+                'birthDate' => 'required',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            $imageName = time().'.'.$request->image->extension();  
+            $request->image->move(public_path('images/avatar'), $imageName);
+        }
+
+        $curP = Profile::find($id);
         
+        $curP->pseudo = $request->pseudo;
+        $curP->birthDate = $request->birthDate;
+        $curP->avatar = $imageName;
+
+        $curP->updated_at = $current_date_time;
+        
+        $curP->save();
+
+        return redirect()->route('profile.show', $id)->with('success', 'Profil mis à jour avec succès !');
+    }
+
+    public function invalidPseudo($id)
+    {
+        try {
+
+            DB::table('profile')->where('profileId','LIKE',$id)->update(['pseudo' => ""]);
+
+            return redirect()->back()->with('success','Le pseudo à correctement été changé');
+
+        } catch (\Throwable $th) {
+
+            dd($th);
+
+            return redirect()->back()->with('alert','Une erreur est survenue');
+        }
+    }
+    
+    public function editPseudo($id)
+    {
+        $profile = Profile::where('profileId', $id)->get();
+        return view('profileBlade.editPseudo', [ "profile" => $profile[0] ]);
+    }
+
+    public function updatePseudo(Request $request, $id)
+    {
+        try {
+            $validatedData = $request->validate([
+                'pseudo' => [
+                    'not_regex:/^(pute|salope|oui|non|invalide)$/i',
+                    'required',
+                    'max:255'
+                ],
+            ]);
+    
+            DB::table('profile')->where('profileId','LIKE',$id)->update(['pseudo' => $validatedData['pseudo']]);
+    
+            return redirect()->route('home')->with('success', 'Le pseudo à correctement été changé');
+
+        } catch (\Throwable $th) {
+
+            return back()->with('alert', 'Le pseudo choisi est invalide.');
+
+        }
     }
 
     /**
