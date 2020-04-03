@@ -142,7 +142,7 @@
             }
         ?>
         <div class="page-wrapper chiller-theme">
-            <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+            <a id="show-sidebar" class="btn btn-sm btn-dark">
                 <i class="fas fa-bars"></i>
             </a>
             <nav id="sidebar" class="sidebar-wrapper">
