@@ -10,7 +10,7 @@ Le projet choisit devra obligatoirement se composer :
 * des pages permettant à l’administrateur de:
     * gérer les utilisateurs 
     * gérer le contenu 
-* des pages permettant aux utilisateursde :
+* des pages permettant aux utilisateurs de :
     * modifier leur profil
     * gérer le contenu
 * des fonctionnalités mettant en avant vos compétences en algorithmie
