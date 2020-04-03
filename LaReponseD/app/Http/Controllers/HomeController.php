@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Category;
 use App\Quiz;
-use App\Profile;
 
 class HomeController extends Controller
 {
@@ -17,7 +16,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'verified']);
     }
 
     /**
