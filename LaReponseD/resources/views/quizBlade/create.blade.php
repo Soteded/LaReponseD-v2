@@ -2,23 +2,22 @@
 
 
 @section('content')
-
-        <link href="{{ asset('css/createQuiz.css') }}" rel="stylesheet" type="text/css">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="card card-6">
             <div class="card-heading">
                 <h2 class="title">Créer ton quiz</h2>
             </div>
-            <div class="card-body">
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-                <form method="POST" action="{{ route('quiz.store') }}" autocomplete="off" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('quiz.store') }}" autocomplete="off" enctype="multipart/form-data">
+            @csrf
+                <div class="card-body">
                     <div class="form-row">
                         <div class="name">Titre</div>
                         <div class="value">
@@ -49,10 +48,10 @@
                             <div class="label--desc">upload une image. MAX jesaisplusMB</div>
                         </div>
                     </div>
-                </form>
-            </div>
-            <div class="card-footer">
-                <button type="submit" class="btn btn-primary">Créer</button>
-            </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Créer</button>
+                </div>
+            </form>
         </div>
 @endsection
