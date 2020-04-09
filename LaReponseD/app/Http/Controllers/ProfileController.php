@@ -134,7 +134,9 @@ class ProfileController extends Controller
         
         $curP->pseudo = $request->pseudo;
         $curP->birthDate = $request->birthDate;
-        $curP->avatar = $imageName;
+        if (isset($imageName)) {
+            $curP->avatar = $imageName;
+        }
 
         $curP->updated_at = $current_date_time;
         
