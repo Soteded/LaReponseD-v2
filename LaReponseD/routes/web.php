@@ -47,6 +47,7 @@ Route::resource('question', 'QuestionController');
 Route::resource('category', 'CategoryController');
 Route::resource('choix', 'ChoixController');
 Route::resource('userNote', 'UserNoteQuizController');
+Route::resource('report', 'reportController');
 
 Route::group(['middleware' => ['auth']], function () { 
     Route::get('/quiz/create', 'QuizController@create')->name('createQuiz');
