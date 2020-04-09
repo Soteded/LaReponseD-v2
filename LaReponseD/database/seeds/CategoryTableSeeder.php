@@ -21,8 +21,18 @@ class CategoryTableSeeder extends Seeder
             'Autre',
         );
 
-        foreach ($allCategory as $category) {
-            Category::create(['categoryName'=> $category]);
+        $allImages =  array(
+            'nonRef.png',
+            'jeuxVideo.png',
+            'film.png',
+            'livre.png',
+            'serie.png',
+            'autre.png',
+        );
+
+        for ($i=0; $i < sizeof($allCategory); $i++) { 
+            Category::create(['categoryName' => $allCategory[$i], 'image' => $allImages[$i]]);
         }
+
     }
 }
