@@ -34,7 +34,7 @@ class ProfileController extends Controller
         foreach ($profiles as $profile) {
 
             if ( $profile['userId'] === Auth::user()->id ) {
-                return redirect('/home')->with('alert', 'Vous avez déjà un profile :(');
+                return redirect()->back()->with('alert', 'Vous avez déjà un profile :(');
             }
         }
 

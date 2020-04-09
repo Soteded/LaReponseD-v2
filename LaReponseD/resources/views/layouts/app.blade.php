@@ -173,7 +173,7 @@
                 <!-- sidebar-header  -->
                 <div class="sidebar-menu">
                     <ul>
-                        @hasrole('Admin')
+                        @hasanyrole('Admin|Modo')
                         <li class="">
                             <a href="{{ route('dashboard') }}">
                             <i class="fa fa-tachometer-alt"></i>
@@ -271,11 +271,20 @@
                 </div>
                 <!-- sidebar-content  -->
                 <div class="sidebar-footer">
-                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    <i class="fa fa-power-off"></i>
-                </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
+                    <!-- contact-access -->
+                    <a href="{{ route('contact') }}" onclick="event.preventDefault(); document.getElementById('contact-form').submit();">
+                        <i class="fas fa-envelope-open"></i>
+                    </a>
+                    <form id="contact-form" action="{{ route('contact') }}" method="GET" style="display: none;">
+                        @csrf
+                    </form>
+
+                    <!-- logout -->
+                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="fa fa-power-off"></i>
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
                 </form>
                 </div>
             </nav>
