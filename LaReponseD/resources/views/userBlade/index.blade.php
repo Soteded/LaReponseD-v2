@@ -29,7 +29,7 @@
                     <tr>
                         <td style="width:5%;"></td>
                         <td style="width:10%;">ID</td>
-                        <td style="width:25%;">Name</td>
+                        <td style="width:25%;">Username</td>
                         <td style="width:20%;">Pseudo</td>
                         <td style="width:30%;">Email</td>
                     </tr>
@@ -88,12 +88,14 @@
                                     echo "Pas de Rôle";
                                 } ?></h6>
                             </td>
+                            @hasrole('Admin')
                             <td>
                                 <form action="{{ route('editRole', $user->id) }}" method="GET">
                                     {{ csrf_field() }}
                                     <button type="submit" class="btn btn-primary btn-block">Changer le role</button>
                                 </form>
                             </td>
+                            @endhasrole
                             <td>
                                 Quiz(s) créé(s) :
                                 <?php
@@ -119,6 +121,7 @@
                                     <button type="submit" class="btn btn-warning btn-block" onclick="return confirm('Êtes-vous sûr(e) ?')">Pseudo Invalide</button>
                                 </form>
                             </td>
+                            @hasrole('Admin')
                             <td>
                                 <form action="{{ route('user.destroy', $user->id) }}" method="POST">
                                     {{ method_field('DELETE') }}
@@ -126,6 +129,7 @@
                                     <button type="submit" class="btn btn-danger btn-block" onclick="return confirm('Êtes-vous sûr(e) ?')"><i class='fas fa-trash'></i></button>
                                 </form>
                             </td>
+                            @endhasrole
                         </tr>
                     @endforeach
                 </tbody>

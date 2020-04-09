@@ -9,7 +9,7 @@
         </div><br />
     @endif
     @if(session()->get('alert'))
-        <div class="alert">
+        <div class="alert alert-warning">
             {{ session()->get('alert') }}
         </div><br />
     @endif
