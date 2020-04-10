@@ -35,7 +35,7 @@ Route::get('/profile/editPseudo/{id}/validate', 'ProfileController@updatePseudo'
 Route::get('/quiz', 'QuizController@index')->name('quiz');
 Route::get('/quiz/categorie/{categoryId}', 'QuizController@indexCategory')->name('categorie');
 
-Route::get('/categories', 'CategoryController@indexu')->name('indexu');
+Route::get('/categories', 'CategoryController@indexu')->name('category.indexu');
 
 Route::get('/contact', 'HomeController@contact')->name('contact')->middleware('verified','auth');
 Route::post('/sendmail', 'HomeController@sendMail')->name('sendMail')->middleware('verified','auth');
