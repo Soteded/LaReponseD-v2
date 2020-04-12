@@ -16,6 +16,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/MooTools.js') }}" type="text/javascript" defer></script>
     <script src="{{ asset('js/sidebar.js') }}" defer></script>
     <script src="{{ asset('js/custom.js') }}" defer></script>
     <script src="https://kit.fontawesome.com/e8767330e3.js" crossorigin="anonymous"></script>
