@@ -141,6 +141,7 @@ $('document').ready(function () {
     input = document.getElementById('searchInput');
     filter = input.value.toUpperCase();
     div = document.getElementById("searchResult");
+    li = div.getElementsByClassName('searchElement');
     var totalHide = 0; // Loop through all list items, and hide those who don't match the search query
 
     for (i = 0; i < li.length; i++) {
