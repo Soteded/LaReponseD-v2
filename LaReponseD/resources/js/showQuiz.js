@@ -25,12 +25,15 @@ const selectPage = () => {
             break;
         case "participe":
             utils.showPage2(hash);
-            utils.showPage("not_report");
+            utils.showPage("participate");
             break;
+        case "commentaire":
+            utils.showPage(hash);
+          	break;
         default:
             case "show":
                 utils.showPage2("show");
-                utils.showPage("not_report");
+                utils.showPage("participate");
                 break;
     }
 };

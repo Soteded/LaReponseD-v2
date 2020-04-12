@@ -122,13 +122,17 @@ var selectPage = function selectPage() {
 
     case "participe":
       utils.showPage2(hash);
-      utils.showPage("not_report");
+      utils.showPage("participate");
+      break;
+
+    case "commentaire":
+      utils.showPage(hash);
       break;
 
     default:
     case "show":
       utils.showPage2("show");
-      utils.showPage("not_report");
+      utils.showPage("participate");
       break;
   }
 };
@@ -145,7 +149,7 @@ window.addEventListener("hashchange", selectPage);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\Workspace\B2\ProjetWeb-LaReponseD_-_v2\LaReponseD\resources\js\showQuiz.js */"./resources/js/showQuiz.js");
+module.exports = __webpack_require__(/*! Y:\B2\LaReponseD-v2\LaReponseD\resources\js\showQuiz.js */"./resources/js/showQuiz.js");
 
 
 /***/ })

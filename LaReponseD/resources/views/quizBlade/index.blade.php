@@ -38,7 +38,7 @@
                         <p>Créé le : <span class="created_at">{{ $quiz->created_at->format('d/m/Y') }}</span></p>
                     </div>
                     <div class="card-footer">
-                        <p> Joué : <span class="compteur"><?php if($quiz->compteur){ echo $quiz->compteur; } else { echo 0; }?></span> fois  /   Note: <span class="noteAvg"><?php if($quiz->noteAvg){ echo $quiz->noteAvg; } else { echo 0; }?></span></p>
+                        <p> Joué : <span class="compteur"><?php if($quiz->compteur){ echo $quiz->compteur; } else { echo 0; }?></span> fois  /   Note: <span class="noteAvg"><?php if($quiz->noteAvg){ echo $quiz->noteAvg; } else { echo "aucune"; }?></span></p>
                     </div>
                 </div>
             </div>

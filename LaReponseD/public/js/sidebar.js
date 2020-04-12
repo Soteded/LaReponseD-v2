@@ -121,7 +121,7 @@ $("#show-sidebar").click(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\Workspace\B2\ProjetWeb-LaReponseD_-_v2\LaReponseD\resources\js\sidebar.js */"./resources/js/sidebar.js");
+module.exports = __webpack_require__(/*! Y:\B2\LaReponseD-v2\LaReponseD\resources\js\sidebar.js */"./resources/js/sidebar.js");
 
 
 /***/ })
