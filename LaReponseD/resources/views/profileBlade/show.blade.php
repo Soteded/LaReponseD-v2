@@ -19,7 +19,7 @@
     </div>
     <div class="card" style="width:60vw;">
         <div class="card-header">
-            <h2 class="float-left">Profile de : {{ $profile->pseudo }}</h2>
+            <h2 class="float-left">Profile</h2>
             @if ($profile->profileId == Auth::id())
                 <form action="{{ route('profile.edit', $profile->profileId ) }}" method="GET">
                     {{ method_field('GET') }}
