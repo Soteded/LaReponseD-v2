@@ -37,7 +37,7 @@
                             <td style="width:10%;">Voir les quizs</td>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody style="height:60vh;">
                         @foreach ( $profiles as $profile )
                             <tr>
                                 <td style="width:5%;"><img class="img-responsive img-rounded" style="width:50px; height:50px;" src="/images/avatar/{{ $profile->avatar }}" alt="User picture"></td>
