@@ -30,7 +30,7 @@
                 <table class="table table-striped" style="display:table;">
                     <thead>
                         <tr>
-                            <td style="width:5%;"></td>
+                            <td style="width:5%; "></td>
                             <td style="width:20%;">Pseudonyme</td>
                             <td style="width:20%;">Créé le :</td>
                             <td style="width:10%;">Voir le profile</td>
