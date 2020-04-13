@@ -13,12 +13,12 @@
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Top 3 des quizs les plus joués :</h5>
                     <?php
-                    $quizs = DB::table('quiz')->orderBy('compteur')->take(3)->get();
+                        $quizs = DB::table('quiz')->orderBy('compteur')->take(3)->get();
                     ?>
                     <div class="row categIndex" style="font-size:1rem;">
                         @foreach($quizs as $quiz)
                         <a href="{{ route('quiz.show', $quiz->quizId) }}" class="card" style="width:28%;">
-                            <div class="card-body">
+                            <div class="card-body" style="background-image: url('/images/miniature/{{$quiz->image}}'); background-size: cover;">
                                 <p>{{ $quiz->titre }}</p>
                             </div>
                         </a>
@@ -30,12 +30,12 @@
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Top 3 des quizs les mieux notés :</h5>
                     <?php
-                    $quizs = DB::table('quiz')->orderBy('noteAvg')->take(3)->get();
+                        $quizs = DB::table('quiz')->orderBy('noteAvg')->take(3)->get();
                     ?>
                     <div class="row categIndex" style="font-size:1rem;">
                         @foreach($quizs as $quiz)
                         <a href="{{ route('quiz.show', $quiz->quizId) }}" class="card" style="width:28%;">
-                            <div class="card-body">
+                            <div class="card-body" style="background-image: url('/images/miniature/{{$quiz->image}}'); background-size: cover;">
                                 <p>{{ $quiz->titre }}</p>
                             </div>
                         </a>
@@ -71,7 +71,7 @@
                         @foreach ($quizs as $quiz)
                             <?php $profile = DB::table('profile')->where('profileId', $quiz->CreatorId)->get(); ?>
                             <a href="{{ route('profile.show', $profile[0]->profileId) }}" class="card" style="width:28%;">
-                                <div class="card-body">
+                                <div class="card-body"style="background-image: url('/images/avatar/{{$profile[0]->avatar}}'); background-size: cover;">
                                     <p>{{ $profile[0]->pseudo }}</p>
                                 </div>
                             </a>

@@ -13,23 +13,38 @@
                         </ul>
                     </div><br />
             @endif
+
+
             <!-- Affichage à gauche -->
             <div class="col no-gutters">
-                <div style="background:grey; width:100%; height:100%;" class="text-white">
+                <div style="width:100%; height:100%;" class="text-white">
                     <div> 
-                        <h5>{{$quiz->titre}}</h5>
-                        <p> {{$quiz->category->categoryName}}</p>
+                        <h3 class="">{{$quiz->titre}}</h3>
+                        <p> {{$quiz->category->categoryName}} </p>
                     </div>
                     @if ($questions != null)
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <td class="h6">Titre</td>
+                                <td class="h6">Réponse Juste</td>
+                                <td class="h6">Réponse 2</td>
+                                <td class="h6">Réponse 3</td>
+                                <td class="h6">Réponse 4</td>
+                            </tr>
+                        </thead>
+                        <tbody class="h-auto mt-2">
                         @foreach($questions as $question)
-                            <div> 
-                                {{$question->question}}
-                                {{$question->choix->choixJuste}}
-                                {{$question->choix->choix2}}
-                                {{$question->choix->choix3}}
-                                {{$question->choix->choix4}}
-                            </div>
+                            <tr class="text-center">
+                                <td class="text-break">{{$question->question}}</td>
+                                <td class="text-break">{{$question->choix->choixJuste}}</td>
+                                <td class="text-break">{{$question->choix->choix2}}</td>
+                                <td class="text-break">{{$question->choix->choix3}}</td>
+                                <td class="text-break">{{$question->choix->choix4}}</td>
+                            </tr>
                         @endforeach
+                        </tbody>
+                    </table>
                     @endif
                 </div>
             </div>
@@ -53,7 +68,7 @@
 
                         <!-- REPONSE Juste DU QUIZs -->
                         <div>
-                            <label for="name">Réponse 1 :</label>
+                            <label for="name">Réponse Juste :</label>
                             <input type="text" class="form-control" name="repJuste" require/>
                         </div>
 

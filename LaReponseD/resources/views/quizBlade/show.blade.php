@@ -70,30 +70,34 @@
                     <form method="post" action="{{ route('verify', ['quizId' => $quiz->quizId]) }}" class="page" id="participe">
                         @csrf
                         <?php $quest = 0 ?>
+                        <h1 class="mb-3">{{$quiz->titre}} </h1>
                         @foreach($quiz->questions as $question)
                             <?php
                                 $choix = $question->choix;
                                 $liste_choix = [$choix->choixJuste, $choix->choix2, $choix->choix3, $choix->choix4];
                                 shuffle($liste_choix);
                             ?>
-                            <div class="border mb-2 p-2">
-                                <h5>{{$question->question}}</h5>
+                            <div class="card mb-2 p-2">
+                                <div class="card-header">
+                                    <h2 class="card-title">{{$question->question}}</h2>
+                                </div>
+                                
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <td>Réponse 1</td>
-                                            <td>Réponse 2</td>
-                                            <td>Réponse 3</td>
-                                            <td>Réponse 4</td>
+                                            <td class="h5">Réponse 1</td>
+                                            <td class="h5">Réponse 2</td>
+                                            <td class="h5">Réponse 3</td>
+                                            <td class="h5">Réponse 4</td>
                                         </tr>
                                     </thead>
 
-                                    <tbody class="h-auto">
+                                    <tbody class="h-auto mt-2">
                                         <tr class="text-center">
                                             @foreach($liste_choix as $choix)
                                                 <td>
-                                                    <input type="radio" value="{{$choix}}" name='{{$quest}}'>
-                                                    <label for='{{$quest}}'>{{$choix}}</label>
+                                                    <input type="radio" value="{{$choix}}" name='{{$quest}}' required/>
+                                                    <label class="h6" for='{{$quest}}'>{{$choix}}</label>
                                                 </td>
                                             @endforeach
                                         </tr>
@@ -102,12 +106,13 @@
                             </div>
                             <?php $quest += 1;?>
                         @endforeach
-                        <button type="submit" class="btn btn-primary page2" name="action" id="participe">Valider</button>
+                        <button type="submit" class="btn btn-primary btn-lg btn-block" name="action" id="participe">Valider</button>
                     </form>
                     
                     <!-- Commente/note du quiz -->  
                     <form method="post" action="{{ route('userNoteQuiz.store', ['quizId' => $quiz->quizId]) }}" class="page" id="commentaire" enctype="multipart/form-data">
                     @csrf
+                        <a class="btn btn-primary" href="#show"><i class="fas fa-arrow-left"></i></a>
                         <div class="form-row">
                             <div class="name">Titre</div>
                             <div class="value">
@@ -135,8 +140,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a class="btn btn-primary" href="#show"><===</a>
-                        <button type="submit" class="btn btn-primary">Valider</button>
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">Valider</button>
                     </form>
 
 
@@ -145,13 +149,12 @@
                     <form method="post" action="{{ route('report.store', ['idReported' => $quiz->quizId, 'type' => 'quiz']) }}" id="report" class="page" enctype="multipart/form-data">
                     @csrf
                         <div class="card-body">
-                            <div class="name">Pourquoi? </div>
+                            <div class="name card-title h3"><a class="btn btn-primary" href="#show"><i class="fas fa-arrow-left"></i></a> Pourquoi? </div>
                             <div class="value">
                                 <textarea class="form-control textarea--style-6" type="text" id="message" name="message" required></textarea>
                             </div>
                         </div>
-                            <a class="btn btn-primary" href="#show"><===</a>
-                            <button type="submit" class="btn btn-primary">Report</button>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">Report</button>
                     </form>
                 </div>
             @endif
