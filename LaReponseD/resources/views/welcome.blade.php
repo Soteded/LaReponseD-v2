@@ -1,60 +1,92 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="content">
-        <div class="title m-b-md">
-            La Réponse D
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="height:30vh;background-color:#222;">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active" style="margin-top:250px;">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Top 3 des quizs les plus joués :</h5>
+                    <?php
+                    $quizs = DB::table('quiz')->orderBy('compteur')->take(3)->get();
+                    ?>
+                    <div class="row categIndex" style="font-size:1rem;">
+                        @foreach($quizs as $quiz)
+                        <a href="{{ route('quiz.show', $quiz->quizId) }}" class="card" style="width:28%;">
+                            <div class="card-body">
+                                <p>{{ $quiz->titre }}</p>
+                            </div>
+                        </a>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item" style="margin-top:270px;">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Top 3 des quizs les mieux notés :</h5>
+                    <?php
+                    $quizs = DB::table('quiz')->orderBy('noteAvg')->take(3)->get();
+                    ?>
+                    <div class="row categIndex" style="font-size:1rem;">
+                        @foreach($quizs as $quiz)
+                        <a href="{{ route('quiz.show', $quiz->quizId) }}" class="card" style="width:28%;">
+                            <div class="card-body">
+                                <p>{{ $quiz->titre }}</p>
+                            </div>
+                        </a>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item" style="margin-top:250px;">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Top 3 des catégories les plus utilisées :</h5>
+                    <?php
+                    $quizs = DB::table('quiz')->select('RCategoryId', DB::raw('count(*)'))->groupBy('RCategoryId')->orderBy(DB::raw('count(*)'))->take(3)->get();
+                    ?>
+                    <div class="row categIndex" style="font-size:1rem;">
+                        @foreach ($quizs as $quiz)
+                            <?php $categ = DB::table('category')->where('categoryId', $quiz->RCategoryId)->get(); ?>
+                            <a href="{{ route('categorie', $categ[0]->categoryId) }}" class="card" style="width:28%;">
+                                <div class="card-body">
+                                    <p>{{ $categ[0]->categoryName }}</p>
+                                </div>
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item" style="margin-top:250px;">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Top 3 des utilisateurs les plus productifs :</h5>
+                    <?php
+                    $quizs = DB::table('quiz')->select('CreatorId', DB::raw('count(*)'))->groupBy('CreatorId')->orderBy(DB::raw('count(*)'))->take(3)->get();
+                    ?>
+                    <div class="row categIndex" style="font-size:1rem;">
+                        @foreach ($quizs as $quiz)
+                            <?php $profile = DB::table('profile')->where('profileId', $quiz->CreatorId)->get(); ?>
+                            <a href="{{ route('profile.show', $profile[0]->profileId) }}" class="card" style="width:28%;">
+                                <div class="card-body">
+                                    <p>{{ $profile[0]->pseudo }}</p>
+                                </div>
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
         </div>
-        <section class="section-content">
-            <div class="container">
-
-                <header class="section-heading">
-                    <h3 class="section-title mb-3">Catégorie</h3>
-                </header><!-- sect-heading -->
-
-
-                <div class="row">
-                    <div class="col-md-3">
-                        <div href="/quiz/categorie/jeu" class="card card-product-grid">
-                            <a href="/quiz/categorie/jeu" class="img-wrap"> <img src="{{ asset('/images/unidab.PNG')  }}" width="200"> </a>
-                            <figcaption class="info-wrap">
-                                <a href="/quiz/categorie/jeu">Jeux</a>
-                            </figcaption>
-                        </div>
-                    </div> <!-- col.// -->
-                    <div class="col-md-3">
-                        <div href="/quiz/categorie/internet" class="card card-product-grid">
-                            <a href="/quiz/categorie/internet" class="img-wrap"> <img src="{{ asset('/images/unidab.PNG')  }}" width="200"> </a>
-                            <figcaption class="info-wrap">
-                                <a href="internet">Internet</a>
-                            </figcaption>
-                        </div>
-                    </div> <!-- col.// -->
-                    <div class="col-md-3">
-                        <div href="/quiz/categorie/cuisine" class="card card-product-grid">
-                            <a href="/quiz/categorie/cuisine" class="img-wrap" > <img src="{{ asset('/images/unidab.PNG')  }}" width="200"> </a>
-                            <figcaption class="info-wrap">
-                                <a href="/quiz/categorie/cuisine">Cuisine</a>
-                            </figcaption>
-                        </div>
-                    </div> <!-- col.// -->
-                    <div class="col-md-3">
-                        <div href="/quiz/categorie/sport" class="card card-product-grid">
-                            <a href="/quiz/categorie/sport" class="img-wrap"> <img src="{{ asset('/images/unidab.PNG')  }}" width="200"> </a>
-                            <figcaption class="info-wrap">
-                                <a href="/quiz/categorie/sport">Sport</a>
-                            </figcaption>
-                        </div>
-                    </div> <!-- col.// -->
-                </div> <!-- row.// -->
-
-
-                <div class="row">
-
-                </div><!--row-->
-            </div> <!-- container .//  -->
-        </section>
-
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
     </div>
-</div>
 @endsection

@@ -8,31 +8,40 @@
             {{ session()->get('success') }}
         </div><br />
     @endif
-    @if(session()->get('alert'))
-        <div class="alert alert-warning">
-            {{ session()->get('alert') }}
-        </div><br />
+    @if(count($errors) > 0)
+        <div class="alert alert-danger">
+            <button type="button" class="close" data-dismiss="alert">x</button>
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
     @endif
         <div class="card">
             <div class="card-header">
                 <h2 class="float-left">Contactez-nous :</h2>
             </div>
             <div class="card-body">
-                <form method="post" action="{{ route('sendMail') }}">
-                    @csrf
+                <form method="post" action="{{ url('sendemail/send') }}">
+                    {{ csrf_field() }}
 
-                    <!--##############################-->
-                    <!--           QUESTION           -->
                     <div class="form-group">
-                        <label for="title">Titre :</label>
-                        <input type="text" class="form-control" placeholder="Votre titre ..." name="title" require/>
+                        <label>Entrez votre nom :</label>
+                        <input type="text" name="name" class="form-control" require/>
                     </div>
+
+                    <div class="form-group">
+                        <label for="email">Entrez votre mail :</label>
+                        <input type="text" name="email" class="form-control" require/>
+                    </div>
+
                     <div>
                         <label for="msg">Message :</label>
-                        <textarea type="text" class="form-control" name="msg" rows="5" cols="33" placeholder="Votre message ..." require></textarea>
+                        <textarea type="text" class="form-control" name="message" rows="5" cols="33" require></textarea>
                     </div>
 
-                    <button type="submit" class="btn btn-primary float-right" style="margin:10px;">Envoyer !</button>
+                    <input type="submit" name="send" value="Send" class="btn btn-info" />
                 </form>
             </div>
         </div>

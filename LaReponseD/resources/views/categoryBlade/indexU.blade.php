@@ -20,7 +20,7 @@
         </div>
         <div class="card-body mainFlex categIndex">
             @foreach ($categories as $category)
-                <a href="{{ route('category.show', $category->categoryId) }}" class="card col-lg-2 col-md-4 mb-2">
+                <a href="{{ route('categorie', $category->categoryId) }}" class="card col-lg-2 col-md-4 mb-2">
                     <div class="card-body">
                         <h4>{{ $category->categoryName }}</h4>
                         Quizs : {{ count($category->quizs) }}
