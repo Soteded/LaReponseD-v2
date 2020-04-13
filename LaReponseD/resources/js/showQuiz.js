@@ -9,7 +9,11 @@ const utils = {
     },
   };
 
+
 const selectPage = () => {
+    $('#buttonShow').click( function() {
+      $('.showCommentaires').slideToggle();
+    })
     const hash = document.location.hash.replace("#", "");
     switch (hash) {
         case "report":
@@ -20,7 +24,7 @@ const selectPage = () => {
             break;
         case "commentaire":
             utils.showPage(hash);
-          	break;
+            break;
         default:
             case "show":
                 utils.showPage("show");

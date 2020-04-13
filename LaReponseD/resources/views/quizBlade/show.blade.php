@@ -17,8 +17,6 @@
                     <p>Ce quiz n'existe pas</p>
                 </div>
             @else
-                
-                
 
                 <div class="card-body">
                     <!-- Show quiz-->
@@ -28,11 +26,39 @@
                                 <img class="card-img-top" src="/images/miniature/{{ $quiz->image }}" alt="">
                             </div>
                             <div class="col-12 col-xl-6">
-                                <div class="row mt-1 pl-1">
-                                    <h2 class="float-left">{{$quiz->titre}}</h2>
+                                <div class="row">
+                                    <div class="col-12 col-xl-6">
+                                        <h2 class="d-flex justify-content-start text-break">{{$quiz->titre}}</h2>
+                                        <div class="card d-flex justify-content-start p-2 mt-4">
+                                            <p class="card-text h3"> Joué : <span><?php if($quiz->compteur){ echo $quiz->compteur; } else { echo 0; }?></span> fois
+                                        </div>
+                                        <div class="card d-flex justify-content-start p-2 mt-4">
+                                            <p class="card-text h3"> Note: <span class="noteAvg"> <?php if($quiz->noteAvg){ echo $quiz->noteAvg; } else { echo "aucune"; }?></span> </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-xl-6 card border-0 d-flex justify-content-start">
+                                        <img class="card-img-top w-100 h-75" src="/images/avatar/{{ $quiz->user->profile->avatar }}" alt="">
+                                        <a href="/profile/{{$quiz->user->profile->profileId}}" class="card-subtitle text-center font-weight-bold mt-1 text-dark"> {{$quiz->user->profile->pseudo}} </a>
+                                        
+                                    </div>
                                 </div>
+                                <a class="btn btn-primary btn-lg btn-block sticky-bot" href="#participe" id="show">Play</a>
                             </div>
                         </div>
+
+                        <div class="row d-flex p-3 mt-3 border">
+                            <h2 class="mr-auto">Commentaires</h2>
+                            <button id="buttonShow" class="p-2 h4 text-dark"> plus de com <i class="fas fa-arrow-down"></i></button>
+                        </div>
+                        @foreach($quiz->comment as $commentaire)
+                            <div class="row border mt-1 showCommentaires"> 
+                            </div>
+                        @endforeach
+                        <div class="row border mt-1 showCommentaires"> 
+                            <img class="card-img-top w-100 h-75" src="/images/avatar/{{ $quiz->user->profile->avatar }}" alt="">
+                        </div>
+                        
+
                     </div>
                     <!-- Participation au quiz-->
                     <form method="post" action="{{ route('verify', ['quizId' => $quiz->quizId]) }}" class="page" id="participe">
@@ -70,7 +96,6 @@
                             </div>
                             <?php $quest += 1;?>
                         @endforeach
-                        <a class="btn btn-primary page2" href="#participe" id="show">Play</a>
                         <button type="submit" class="btn btn-primary page2" name="action" id="participe">Valider</button>
                         <a class="btn btn-primary float-lg-right" href="#report">Report</a>
                         <a class="btn btn-primary float-lg-right" href="#commentaire">Comment</a>

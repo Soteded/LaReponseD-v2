@@ -105,6 +105,9 @@ var utils = {
 };
 
 var selectPage = function selectPage() {
+  $('#buttonShow').click(function () {
+    $('.showCommentaires').slideToggle();
+  });
   var hash = document.location.hash.replace("#", "");
 
   switch (hash) {
@@ -139,7 +142,7 @@ window.addEventListener("hashchange", selectPage);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\Workspace\B2\ProjetWeb-LaReponseD_-_v2\LaReponseD\resources\js\showQuiz.js */"./resources/js/showQuiz.js");
+module.exports = __webpack_require__(/*! Y:\B2\LaReponseD-v2\LaReponseD\resources\js\showQuiz.js */"./resources/js/showQuiz.js");
 
 
 /***/ })
