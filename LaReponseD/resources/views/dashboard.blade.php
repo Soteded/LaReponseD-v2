@@ -252,6 +252,51 @@
             </div>
         </div>
 
+        <div class="card" style='margin:1%;width:100%;'>
+            <div class="card-header">
+                <h2 class="float-left">Signalements</h2>
+            </div>
+            <div id="usersDb" class="card-body">
+                <table class="table table-striped" style="display:table;">
+                    <thead>
+                        <tr>
+                            <td style="width:5%;"></td>
+                            <td style="width:5%;">ID</td>
+                            <td style="width:15%;">ID Signalé</td>
+                            <td style="width:15%;">Type</td>
+                            <td style="width:25%;">Message</td>
+                            <td style="width:20%;">Créé le :</td>
+                            <td style="width:15%;">Supprimer</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $color = true;?>
+                        @foreach( $reports as $report )
+                            <?php
+                            if ($color) {
+                                echo "<tr style='background-color:#eee;'>";
+                            } else {
+                                echo "<tr style='background-color:#fff;'>";
+                            }?>
+                                <td style="width:5%;"><a id='<?php echo $user->id; ?>' class="btn userDetail"><i class="fas fa-plus"></i></a></td>
+                                <td style="width:5%;">{{ $report->reportId }}</td>
+                                <td style="width:15%;">{{ $report->idReported }}</td>
+                                <td style="width:15%;">{{ $report->type }}</td>
+                                <td style="width:25%;">{{ $report->message }}</td>
+                                <td style="width:20%;">{{ $report->created_at }}</td>
+                                <td style="width:15%;">
+                                    <form action="{{ route('report.destroy', $report->reportId) }}" method="POST">
+                                        {{ method_field('DELETE') }}
+                                        {{ csrf_field() }}
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr(e) ?')"><i class='fas fa-trash'></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 @endsection

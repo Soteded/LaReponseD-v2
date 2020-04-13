@@ -235,6 +235,12 @@
                             <span>Quizz</span>
                         </li>
                         <li class="">
+                            <a href="{{ route('category.indexu') }}">
+                            <i class="fas fa-question-circle"></i>
+                            <span>Toutes les catégories</span>
+                            </a>
+                        </li>
+                        <li class="">
                             <a href="{{ route('quiz.index') }}">
                             <i class="fas fa-question-circle"></i>
                             <span>Tous les quizz</span>

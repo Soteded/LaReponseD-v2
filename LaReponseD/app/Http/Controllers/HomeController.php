@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Category;
 use App\Quiz;
+use App\Report;
 use Mail;
 
 class HomeController extends Controller
@@ -40,8 +41,9 @@ class HomeController extends Controller
         $users = User::all();
         $categories = Category::all();
         $quizs = Quiz::all();
+        $reports = Report::all();
 
-        return view('dashboard', ['users' => $users, 'categories' => $categories, 'quizs' => $quizs]);
+        return view('dashboard', ['users' => $users, 'categories' => $categories, 'quizs' => $quizs, 'reports' => $reports]);
     }
 
     public function contact(){

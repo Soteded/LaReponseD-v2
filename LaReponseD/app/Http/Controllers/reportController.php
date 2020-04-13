@@ -53,6 +53,17 @@ class reportController extends Controller
 
     public function destroy($id)
     {
-        //
+        try {
+            /*-------------DELETE QUIZ-------------*/
+            Report::where('reportId', $id)->delete();
+
+            return redirect()->back()->with('success','Signalement supprimé avec succès!');
+
+        } catch (\Throwable $th) {
+
+            dd($th);
+
+            return redirect()->back()->with('alert','Une erreur est survenue');
+        }
     }
 }
