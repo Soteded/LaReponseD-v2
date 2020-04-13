@@ -16,7 +16,7 @@
 
 
             <!-- Affichage à gauche -->
-            <div class="col no-gutters">
+            <div class="col no-gutters border">
                 <div style="width:100%; height:100%;" class="text-white">
                     <div> 
                         <h3 class="">{{$quiz->titre}}</h3>
@@ -26,7 +26,7 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <td class="h6">Titre</td>
+                                <td class="h6">Question</td>
                                 <td class="h6">Réponse Juste</td>
                                 <td class="h6">Réponse 2</td>
                                 <td class="h6">Réponse 3</td>
@@ -53,46 +53,44 @@
 
             <!-- Formulaire à droite -->
             <div class="col no-gutters">
-                <div class="card-body" style="background:red; width:100%; height:100%;">
+                <div class="card-body border">
                     <form method="post" action="{{ route('question.store') }}">
                         @csrf
 
                         <!--##############################-->
                         <!--           QUESTION           -->
-                        <div class="form-group">
-                            <label for="name">Question :</label>
-                            <input type="text" class="form-control" name="question" require/>
+                        <div class="form-row">
+                            <label for="name" class="name">Question :</label>
+                            <input class="form-control input--style-6" type="text" id="question" name="question"  required/>
                         </div>
-
-                        <hr>
 
                         <!-- REPONSE Juste DU QUIZs -->
-                        <div>
-                            <label for="name">Réponse Juste :</label>
-                            <input type="text" class="form-control" name="repJuste" require/>
-                        </div>
-
-                        <!-- REPONSE 1 DU QUIZs -->
-                        <div>
-                            <label for="name">Réponse 2 :</label>
-                            <input type="text" class="form-control" name="rep2" require/>
+                        <div class="form-row">
+                            <label for="name" class="name">Réponse Juste :</label>
+                            <input class="form-control input--style-6" type="text" id="repJuste" name="repJuste"  required/>
                         </div>
 
                         <!-- REPONSE 2 DU QUIZs -->
-                        <div>
-                            <label for="name">Réponse 3 :</label>
-                            <input type="text" class="form-control" name="rep3" require/>
+                        <div class="form-row">
+                            <label for="name" class="name">Réponse 2 :</label>
+                            <input class="form-control input--style-6" type="text" id="rep2" name="rep2"  required/>
                         </div>
 
                         <!-- REPONSE 3 DU QUIZs -->
-                        <div>
-                            <label for="name">Réponse 4 :</label>
-                            <input type="text" class="form-control" name="rep4" require/>
+                        <div class="form-row">
+                            <label class="name">Réponse 3 :</label>
+                            <input class="form-control input--style-6" type="text" id="rep3" name="rep3"  required/>
+                        </div>
+
+                        <!-- REPONSE 4 DU QUIZs -->
+                        <div class="form-row">
+                            <label class="name">Réponse 2 :</label>
+                            <input class="form-control input--style-6" type="text" id="rep4" name="rep4"  required/>
                         </div>
                         <!--##############################-->
 
-                        <button type="submit" class="btn btn-primary" name="action" value="again">Again</button>
-                        <button type="submit" class="btn btn-primary" name="action" value="end">End</button>
+                        <button type="submit" class="btn btn-primary  btn-lg btn-block" name="action" value="again">Question suivante</button>
+                        <button type="submit" class="btn btn-primary  btn-lg btn-block" name="action" value="end">Fini</button>
                     </form>
                 </div>
             </div>

@@ -6,31 +6,46 @@
         <div class="row no-gutters">
 
             <!-- Affichage à gauche -->
-            <div class="col no-gutters">
-                <div style="background:grey; width:100%; height:100%;">
-                    <div style="background:grey; width:100%; height:100%;" class="text-white">
-                        <div> 
+            <div class="col no-gutters ">
+                <div class="text-white border">
+                    <div class="row"> 
+                        <div class="col">
                             <h5>{{$quiz->titre}}</h5>
                             <p> {{$quiz->category->categoryName}}</p>
-                            <a class="btn btn-primary" href="#category">==></a>
                         </div>
-                            @foreach($quiz->questions as $question)
-                                <div> 
-                                    {{$question->question}}
-                                    {{$question->choix->choixJuste}}
-                                    {{$question->choix->choix2}}
-                                    {{$question->choix->choix3}}
-                                    {{$question->choix->choix4}}
-                                    <a class="btn btn-primary" href="#question/{{$question->questionId}}">==></a>
-                                </div>
-                            @endforeach
+                        <div class="col pt-3 pr-5">
+                            <a class="btn btn-primary float-right " href="#category"><i class="fas fa-arrow-right"></i></a>
+                        </div>
                     </div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <td class="h6">Question</td>
+                                <td class="h6">Réponse Juste</td>
+                                <td class="h6">Réponse 2</td>
+                                <td class="h6">Réponse 3</td>
+                                <td class="h6">Réponse 4</td>
+                            </tr>
+                        </thead>
+                        <tbody class="h-auto mt-2">
+                        @foreach($quiz->questions as $question)
+                            <tr class="text-center">
+                                <td class="text-break">{{$question->question}}</td>
+                                <td class="text-break">{{$question->choix->choixJuste}}</td>
+                                <td class="text-break">{{$question->choix->choix2}}</td>
+                                <td class="text-break">{{$question->choix->choix3}}</td>
+                                <td class="text-break">{{$question->choix->choix4}}</td>
+                            </tr>
+                            <tr> <td><a class="btn btn-primary btn-lg btn-block" href="#question/{{$question->questionId}}"><i class="fas fa-arrow-right"></i></a></td> </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
             <!-- Formulaire à droite -->
-            <div class="col no-gutters">
-                <div class="card-body" style="background:red; width:100%; height:100%;">
+            <div class="col no-gutters border">
+                <div class="card-body">
                     @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>
@@ -45,17 +60,24 @@
                             <form method="post" action="{{ route('quiz.update', $quiz->quizId) }}" autocomplete="off">
                             @method('PATCH')
                             @csrf
-                                <label for="theme">Theme :</label>
-                                <select name="theme" id="theme" required>
-                                    <option value="{{$quiz->category->categoryId}}">{{$quiz->category->categoryName}}</option>
-                                    @foreach ($categorys as $category)
-                                        @if($category->categoryId == $quiz->category->categoryId)
-                                            @continue
-                                        @endif
-                                        <option value="{{$category->categoryId}}">{{$category->categoryName}}</option>
-                                    @endforeach
-                                </select>
-                                <button type="submit" class="btn btn-primary">Update</button>
+
+                            <div class="form-row">
+                                <div class="name">Theme</div>
+                                    <div class="value">
+                                        <div class="input-group">
+                                            <select name="theme" id="theme" required>
+                                                <option value="{{$quiz->category->categoryId}}">{{$quiz->category->categoryName}}</option>
+                                                @foreach ($categorys as $category)
+                                                    @if($category->categoryId == $quiz->category->categoryId)
+                                                        @continue
+                                                    @endif
+                                                    <option value="{{$category->categoryId}}">{{$category->categoryName}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-lg btn-block">Update</button>
                             </form>
                         </div>
 
@@ -68,38 +90,41 @@
                                         <label for="questionId">Question :</label>
                                         <input type="text" class="form-control" name="questions[questionId]" value="{{ $question->questionId }}" />
                                     </div>
-
-                                    <div class="form-group">
-                                        <label for="question">Question :</label>
-                                        <input type="text" class="form-control" name="questions[question]" value="{{ $question->question }}" />
+                                    <!--##############################-->
+                                    <!--           QUESTION           -->
+                                    <div class="form-row">
+                                        <label for="name" class="name">Question :</label>
+                                        <input class="form-control input--style-6" type="text" name="questions[question]" value="{{ $question->question }}" required/>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label for="choixJuste">choix Juste :</label>
-                                        <input type="text" class="form-control" name="questions[choixJuste]" value="{{ $question->choix->choixJuste }}" />
+                                    <!-- REPONSE Juste DU QUIZs -->
+                                    <div class="form-row">
+                                        <label for="name" class="name">Réponse Juste :</label>
+                                        <input class="form-control input--style-6" type="text" name="questions[choixJuste]" value="{{ $question->choix->choixJuste }}" required/>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label for="choix2">choix2 :</label>
-                                        <input type="text" class="form-control" name="questions[choix2]" value="{{ $question->choix->choix2 }}" />
+                                    <!-- REPONSE 2 DU QUIZs -->
+                                    <div class="form-row">
+                                        <label for="name" class="name">Réponse 2 :</label>
+                                        <input class="form-control input--style-6" type="text" name="questions[choix2]" value="{{ $question->choix->choix2 }}" required/>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label for="choix3">choix3 :</label>
-                                        <input type="text" class="form-control" name="questions[choix3]" value="{{ $question->choix->choix3 }}" />
+                                    <!-- REPONSE 3 DU QUIZs -->
+                                    <div class="form-row">
+                                        <label class="name">Réponse 3 :</label>
+                                        <input class="form-control input--style-6" type="text" name="questions[choix3]"  value="{{ $question->choix->choix3 }}"required/>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label for="choix4">choix4 :</label>
-                                        <input type="text" class="form-control" name="questions[choix4]" value="{{ $question->choix->choix4 }}" />
+                                    <!-- REPONSE 4 DU QUIZs -->
+                                    <div class="form-row">
+                                        <label class="name">Réponse 2 :</label>
+                                        <input class="form-control input--style-6" type="text" name="questions[choix4]"  value="{{ $question->choix->choix4 }}"required/>
                                     </div>
 
-                                    <button type="submit" class="btn btn-primary">Update</button>
+                                    <button type="submit" class="btn btn-primary btn-lg btn-block">Update</button>
                                 </form>
                             </div>
-                        @endforeach
-                    </form>
-        
+                        @endforeach        
                 </div>
             </div>
         </div>
