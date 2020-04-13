@@ -3,7 +3,6 @@
 /public/storage
 /public/images/avatar
 /public/images/miniature
-/public/images/categorie
 /storage/*.key
 /vendor
 .env
