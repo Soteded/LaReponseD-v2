@@ -37,8 +37,8 @@ Route::get('/quiz/categorie/{categoryId}', 'QuizController@indexCategory')->name
 
 Route::get('/categories', 'CategoryController@indexu')->name('category.indexu');
 
-Route::get('/contact', 'HomeController@contact')->name('contact')->middleware('verified','auth');
-Route::post('/sendmail', 'HomeController@sendMail')->name('sendMail')->middleware('verified','auth');
+Route::get('/sendemail', 'SendEmailController@index')->name('contact');
+Route::post('/sendemail/send', 'SendEmailController@send')->name('sendMail');
 
 Route::resource('profile', 'ProfileController');
 Route::resource('quiz', 'QuizController');

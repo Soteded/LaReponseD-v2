@@ -7,7 +7,6 @@ use App\User;
 use App\Category;
 use App\Quiz;
 use App\Report;
-use Mail;
 
 class HomeController extends Controller
 {
@@ -44,23 +43,5 @@ class HomeController extends Controller
         $reports = Report::all();
 
         return view('dashboard', ['users' => $users, 'categories' => $categories, 'quizs' => $quizs, 'reports' => $reports]);
-    }
-
-    public function contact(){
-        return view('contact');
-    }
-
-    public function sendMail(Request $request){
-        try {
-            dd($request->all());
-
-            return redirect()->back()->with('success', 'Votre mail a bien été transmis !');
-            // SEND MAIL + RETURN
-        } catch (\Throwable $th) {
-
-            dd($th);
-            
-            return redirect()->back()->with('error', 'Une erreur est survenue');
-        }
     }
 }

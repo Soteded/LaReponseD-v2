@@ -107,9 +107,11 @@ $(".sidebar-dropdown > a").click(function () {
 });
 $("#close-sidebar").click(function () {
   $(".page-wrapper").removeClass("toggled");
+  $("#appName").fadeIn();
 });
 $("#show-sidebar").click(function () {
   $(".page-wrapper").addClass("toggled");
+  $("#appName").fadeOut();
 });
 
 /***/ }),
