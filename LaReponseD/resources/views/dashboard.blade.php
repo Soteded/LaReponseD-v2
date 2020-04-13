@@ -235,7 +235,7 @@
                                     Commentaires : <br/>
                                     @foreach ($quiz->comments as $comment)
                                         <div style="display: flex; padding: 2px;">
-                                            <form action="{{ route('userNote.destroy', $comment->userNoteQuizId ) }}" method="POST">
+                                            <form action="{{ route('userNoteQuiz.destroy', $comment->userNoteQuizId ) }}" method="POST">
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}
                                                 <button type="submit" class="btn btn-danger" style="font-size: 10px; margin-right: 2px;" onclick="return confirm('Êtes-vous sûr(e) ?')"><i class='fas fa-trash'></i></button>
