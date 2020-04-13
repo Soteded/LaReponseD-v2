@@ -61,6 +61,7 @@
                                 <div class="card-body">
                                     <p class="card-text">{{$commentaire->corps}}</p>
                                 </div>
+                            <div class="row border mt-1 showCommentaires"> 
                             </div>
                         @endforeach
                     </div>
