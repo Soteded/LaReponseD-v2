@@ -33,15 +33,16 @@
                         <tr>
                             <td>Quizz :</td>
                             <td>Joués (X) fois :</td>
+                            <td> Edit </td>
                         </tr>
                     </thead>
                     <tbody>
                         <?php $quizs = DB::table('quiz')->where('CreatorId','LIKE',Auth::user()->id)->get();?>
                         @foreach($quizs as $quiz)
                             <tr>
-                                    <td class="text-center">{{ $quiz->titre }}</td>
-                                    <td class="text-center">{{ $quiz->compteur }}</td>
-                                    <td><button type="button" class="btn btn-primary float-right" onclick="window.location='{{ url("quiz/edit/$quiz->quizId") }}'">Edit</button> </td>
+                                <td class="text-center">{{ $quiz->titre }}</td>
+                                <td class="text-center">{{ $quiz->compteur }}</td>
+                                <td><button type="button" class="btn btn-primary flex-center m-auto" onclick="window.location='{{ url("quiz/edit/$quiz->quizId") }}'">Edit</button> </td>
                             </tr>
                         @endforeach
                     </tbody>
