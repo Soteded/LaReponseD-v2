@@ -42,7 +42,9 @@
                                         
                                     </div>
                                 </div>
-                                <a class="btn btn-primary btn-lg btn-block sticky-bot" href="#participe" id="show">Play</a>
+                                <a class="btn btn-primary btn-lg btn-block" href="#participe" id="show">Play</a>
+                                <a class="btn btn-primary btn-lg btn-block" href="#report">Report</a>
+                                <a class="btn btn-primary btn-lg btn-block" href="#commentaire">Comment</a>
                             </div>
                         </div>
 
@@ -59,12 +61,8 @@
                                 <div class="card-body">
                                     <p class="card-text">{{$commentaire->corps}}</p>
                                 </div>
-                            <div class="row border mt-1 showCommentaires"> 
                             </div>
                         @endforeach
-                        <div class="row border mt-1 showCommentaires"> 
-                            <img class="card-img-top w-100 h-75" src="/images/avatar/{{ $quiz->user->profile->avatar }}" alt="">
-                        </div>
                         
 
                     </div>
@@ -105,8 +103,6 @@
                             <?php $quest += 1;?>
                         @endforeach
                         <button type="submit" class="btn btn-primary page2" name="action" id="participe">Valider</button>
-                        <a class="btn btn-primary float-lg-right" href="#report">Report</a>
-                        <a class="btn btn-primary float-lg-right" href="#commentaire">Comment</a>
                     </form>
                     
                     <!-- Commente/note du quiz -->  
