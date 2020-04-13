@@ -33,7 +33,7 @@
                                             <p class="card-text h3"> Joué : <span><?php if($quiz->compteur){ echo $quiz->compteur; } else { echo 0; }?></span> fois
                                         </div>
                                         <div class="card d-flex justify-content-start p-2 mt-4">
-                                            <p class="card-text h3"> Note: <span class="noteAvg"> <?php if($quiz->noteAvg){ echo $quiz->noteAvg; } else { echo "aucune"; }?> / 10</span> </p>
+                                            <p class="card-text h3"> Note: <span class="noteAvg"> <?php if($quiz->noteAvg){ echo $quiz->noteAvg; } else { echo "aucune"; }?></span> </p>
                                         </div>
                                     </div>
                                     <div class="col-12 col-xl-6 card border-0 d-flex justify-content-start">
@@ -42,9 +42,7 @@
                                         
                                     </div>
                                 </div>
-                                <a class="btn btn-primary btn-lg btn-block" href="#participe" id="show">Play</a>
-                                <a class="btn btn-primary btn-lg btn-block" href="#commentaire">Comment</a>
-                                <a class="btn btn-primary btn-lg btn-block" href="#report">Report</a>
+                                <a class="btn btn-primary btn-lg btn-block sticky-bot" href="#participe" id="show">Play</a>
                             </div>
                         </div>
 
@@ -64,8 +62,12 @@
                             <div class="row border mt-1 showCommentaires"> 
                             </div>
                         @endforeach
-                    </div>
+                        <div class="row border mt-1 showCommentaires"> 
+                            <img class="card-img-top w-100 h-75" src="/images/avatar/{{ $quiz->user->profile->avatar }}" alt="">
+                        </div>
+                        
 
+                    </div>
                     <!-- Participation au quiz-->
                     <form method="post" action="{{ route('verify', ['quizId' => $quiz->quizId]) }}" class="page" id="participe">
                         @csrf
@@ -102,7 +104,9 @@
                             </div>
                             <?php $quest += 1;?>
                         @endforeach
-                        <button type="submit" class="btn btn-primary btn-lg btn-block">Valider</button>
+                        <button type="submit" class="btn btn-primary page2" name="action" id="participe">Valider</button>
+                        <a class="btn btn-primary float-lg-right" href="#report">Report</a>
+                        <a class="btn btn-primary float-lg-right" href="#commentaire">Comment</a>
                     </form>
                     
                     <!-- Commente/note du quiz -->  
@@ -135,7 +139,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a class="btn btn-primary" href="#show"><i class="fas fa-arrow-left"></i></a>
+                        <a class="btn btn-primary" href="#show"><===</a>
                         <button type="submit" class="btn btn-primary">Valider</button>
                     </form>
 
@@ -150,7 +154,7 @@
                                 <textarea class="form-control textarea--style-6" type="text" id="message" name="message" required></textarea>
                             </div>
                         </div>
-                            <a class="btn btn-primary" href="#show"><i class="fas fa-arrow-left"></i></a>
+                            <a class="btn btn-primary" href="#show"><===</a>
                             <button type="submit" class="btn btn-primary">Report</button>
                     </form>
                 </div>
