@@ -50,7 +50,7 @@
                             <h2 class="mr-auto">Commentaires</h2>
                             <button id="buttonShow" class="p-2 h4 text-dark"> plus de com <i class="fas fa-arrow-down"></i></button>
                         </div>
-                        @foreach($quiz->comment as $commentaire)
+                        @foreach($quiz->comments as $commentaire)
                             <div class="row border mt-1 showCommentaires"> 
                             </div>
                         @endforeach
