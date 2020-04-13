@@ -7,14 +7,6 @@ const utils = {
         else page.style.display = "none";
       }
     },
-    showPage2: pageId => {
-      const pages = document.getElementsByClassName("page2");
-      for (let i = 0; i < pages.length; i++) {
-        const page = pages[i];
-        if (page.id == pageId) page.style.display = "";
-        else page.style.display = "none";
-      }
-    },
   };
 
 const selectPage = () => {
@@ -24,16 +16,14 @@ const selectPage = () => {
             utils.showPage(hash);
             break;
         case "participe":
-            utils.showPage2(hash);
-            utils.showPage("participate");
+            utils.showPage(hash);
             break;
         case "commentaire":
             utils.showPage(hash);
           	break;
         default:
             case "show":
-                utils.showPage2("show");
-                utils.showPage("participate");
+                utils.showPage("show");
                 break;
     }
 };

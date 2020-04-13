@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 use App\UserNoteQuiz;
+use App\Quiz;
 
 class UserNoteQuizController extends Controller
 {
@@ -36,7 +37,32 @@ class UserNoteQuizController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $userId = Auth::user()->id;
+        $validatedQuiz = $request->validate([
+            'titre' => 'required',
+            'message' => 'required',
+            'note' => 'required',
+        ]);
+        
+        $newNote = new UserNoteQuiz;
+        $newNote->userPostId = $userId;
+        $newNote->RQuizId = $request->quizId;
+        $newNote->titre = $request->titre;
+        $newNote->corps = $request->message;
+        $newNote->note = $request->note;
+        $newNote->save();
+
+        $allNote = UserNoteQuiz::select('note')->where('RQuizId', $request->quizId)->get();
+        $nbNote = 0;
+        $moyenne = 0;
+        foreach ($allNote as $note) {
+            $moyenne += $note->note;
+            $nbNote += 1;
+        }
+        $moyenne = $moyenne / $nbNote;
+        Quiz::where('quizId', $request->quizId)->update(array('noteAvg' => $moyenne));
+
+        return redirect()->back()->withSuccess("c'est noté lol trop marrant");
     }
 
     /**

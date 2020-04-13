@@ -101,14 +101,6 @@ var utils = {
       var page = pages[i];
       if (page.id == pageId) page.style.display = "";else page.style.display = "none";
     }
-  },
-  showPage2: function showPage2(pageId) {
-    var pages = document.getElementsByClassName("page2");
-
-    for (var i = 0; i < pages.length; i++) {
-      var page = pages[i];
-      if (page.id == pageId) page.style.display = "";else page.style.display = "none";
-    }
   }
 };
 
@@ -121,8 +113,7 @@ var selectPage = function selectPage() {
       break;
 
     case "participe":
-      utils.showPage2(hash);
-      utils.showPage("participate");
+      utils.showPage(hash);
       break;
 
     case "commentaire":
@@ -131,8 +122,7 @@ var selectPage = function selectPage() {
 
     default:
     case "show":
-      utils.showPage2("show");
-      utils.showPage("participate");
+      utils.showPage("show");
       break;
   }
 };

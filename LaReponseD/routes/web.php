@@ -46,7 +46,7 @@ Route::resource('user', 'UserController', ['except' => ['index', 'create', 'stor
 Route::resource('question', 'QuestionController');
 Route::resource('category', 'CategoryController');
 Route::resource('choix', 'ChoixController');
-Route::resource('userNote', 'UserNoteQuizController');
+Route::resource('userNoteQuiz', 'UserNoteQuizController');
 Route::resource('report', 'reportController');
 
 Route::group(['middleware' => ['auth']], function () { 

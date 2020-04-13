@@ -17,16 +17,27 @@
                     <p>Ce quiz n'existe pas</p>
                 </div>
             @else
-                <div class="card-header">
-                    <h2 class="float-left">{{$quiz->titre}}</h2>
-                </div>
                 
-                <?php $quest = 0 ?>
+                
 
                 <div class="card-body">
+                    <!-- Show quiz-->
+                    <div class="page" id="show">
+                        <div class="row">
+                            <div class="col-12 col-xl-6">
+                                <img class="card-img-top" src="/images/miniature/{{ $quiz->image }}" alt="">
+                            </div>
+                            <div class="col-12 col-xl-6">
+                                <div class="row mt-1 pl-1">
+                                    <h2 class="float-left">{{$quiz->titre}}</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <!-- Participation au quiz-->
-                    <form method="post" action="{{ route('verify', ['quizId' => $quiz->quizId]) }}" class="page" id="participate">
+                    <form method="post" action="{{ route('verify', ['quizId' => $quiz->quizId]) }}" class="page" id="participe">
                         @csrf
+                        <?php $quest = 0 ?>
                         @foreach($quiz->questions as $question)
                             <?php
                                 $choix = $question->choix;
@@ -48,10 +59,7 @@
                                     <tbody class="h-auto">
                                         <tr class="text-center">
                                             @foreach($liste_choix as $choix)
-                                                <td class="page2" id="show">
-                                                    {{$choix}}
-                                                </td>
-                                                <td class="page2" id="participe">
+                                                <td>
                                                     <input type="radio" value="{{$choix}}" name='{{$quest}}'>
                                                     <label for='{{$quest}}'>{{$choix}}</label>
                                                 </td>
@@ -69,7 +77,7 @@
                     </form>
                     
                     <!-- Commente/note du quiz -->  
-                    <form method="post" action="{{ route('userNote.store', ['quizId' => $quiz->quizId]) }}" class="page" id="commentaire">
+                    <form method="post" action="{{ route('userNoteQuiz.store', ['quizId' => $quiz->quizId]) }}" class="page" id="commentaire" enctype="multipart/form-data">
                     @csrf
                         <div class="form-row">
                             <div class="name">Titre</div>
@@ -99,7 +107,7 @@
                             </div>
                         </div>
                         <a class="btn btn-primary" href="#show"><===</a>
-                        <button type="submit" class="btn btn-primary" name="action">Valider</button>
+                        <button type="submit" class="btn btn-primary">Valider</button>
                     </form>
 
 
